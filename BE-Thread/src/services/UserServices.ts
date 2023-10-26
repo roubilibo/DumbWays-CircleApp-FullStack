@@ -11,7 +11,7 @@ class UserServices {
 	async find(req: Request, res: Response): Promise<Response> {
 		try {
 			const users = await this.UserRepository.find();
-			return res.status(200).json(users);
+			return res.status(200).json({ code: 200, data: users });
 		} catch (error) {
 			res.status(500).json({ error: "error while getting users" });
 		}

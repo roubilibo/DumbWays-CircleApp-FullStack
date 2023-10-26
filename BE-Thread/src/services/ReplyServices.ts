@@ -26,7 +26,7 @@ class ReplysServices {
 					},
 				},
 			});
-			return res.status(200).json(replies);
+			return res.status(200).json({ code: 200, dara: replies });
 		} catch (error) {
 			res.status(500).json({ error: "error while getting replies" });
 		}

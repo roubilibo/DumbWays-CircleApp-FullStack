@@ -12,7 +12,7 @@ class LikeServices {
 			const likes = await this.LikeRepository.find({
 				relations: ["thread", "user"],
 			});
-			return res.status(200).json(likes);
+			return res.status(200).json({ code: 200, data: likes });
 		} catch (error) {
 			res.status(500).json({ error: "error while getting likes" });
 		}
