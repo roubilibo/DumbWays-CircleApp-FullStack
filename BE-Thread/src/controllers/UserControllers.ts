@@ -14,9 +14,18 @@ class UserControllers {
 	update(req: Request, res: Response) {
 		UserServices.update(req, res);
 	}
-		delete(req: Request, res: Response) {
-			UserServices.delete(req, res);
-		}
+	delete(req: Request, res: Response) {
+		UserServices.delete(req, res);
+	}
+	register(req: Request, res: Response) {
+		UserServices.register(req, res);
+	}
+	login(req: Request, res: Response) {
+		UserServices.login(req, res);
+	}
+	check(req: Request, res: Response) {
+		UserServices.check(req, res);
+	}
 }
 
 export default new UserControllers();

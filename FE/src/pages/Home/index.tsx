@@ -29,7 +29,7 @@ import { ChangeEvent } from "react";
 
 type formInputData = {
 	content: string;
-	image: string;
+	image?: string;
 	user: number;
 };
 
