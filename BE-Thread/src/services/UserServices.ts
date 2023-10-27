@@ -178,7 +178,7 @@ class UserServices {
 		try {
 			const loginSession = res.locals.loginSession;
 			const user = await this.UserRepository.findOne({
-				where: { id: loginSession.id },
+				where: { id: loginSession.user.id },
 			});
 			return res.status(200).json({ user, message: "you are logged in" });
 		} catch (error) {

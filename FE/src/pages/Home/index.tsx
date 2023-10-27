@@ -88,11 +88,13 @@ function Home() {
 							<Input
 								name="image"
 								placeholder="Image URL"
+								color={"white"}
 								onChange={handleChange}
 							/>
 							<Input
 								name="user"
 								placeholder="User ID"
+								color={"white"}
 								onChange={handleChange}
 							/>
 						</HStack>

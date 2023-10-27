@@ -1,4 +1,16 @@
-import { Avatar, Box, Flex, HStack, Image, Text } from "@chakra-ui/react";
+import {
+	Avatar,
+	Box,
+	Flex,
+	HStack,
+	Image,
+	Modal,
+	ModalBody,
+	ModalContent,
+	ModalOverlay,
+	Text,
+	useDisclosure,
+} from "@chakra-ui/react";
 import { BsDot } from "react-icons/bs";
 import { AiFillHeart } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
@@ -20,6 +32,8 @@ function ThreadDetail(props: ThreadAPI) {
 
 	const [like, setLike] = useState(false);
 
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	// console.log(user.profile_picture);
 	function handleLike() {
 		setLike(!like);
 	}
@@ -27,7 +41,7 @@ function ThreadDetail(props: ThreadAPI) {
 	return (
 		<Flex gap={3} borderBottom="1px solid gray">
 			<Avatar size="sm" name={user.fullname} src={user.profile_picture} />
-			<Box mb={4}>
+			<Box mb={4} w={"full"}>
 				<HStack>
 					<Text
 						display="flex"
@@ -44,10 +58,56 @@ function ThreadDetail(props: ThreadAPI) {
 						</Text>
 					</Text>
 				</HStack>
-				<Text fontSize="xs" color="whiteAlpha.800" fontWeight="light">
+				{/* <Text fontSize="xs" color="whiteAlpha.800" fontWeight="light">
 					{content}
 				</Text>
-				{image && <Image src={image} />}
+				{image && (
+					<Image
+						src={image}
+						objectFit="cover"
+						objectPosition="top right"
+						w="50px"
+						h="50px"
+						position="absolute"
+						top="0"
+						right="0"
+						cursor="pointer"
+						onClick={onOpen}
+					/>
+				)} */}
+				<Flex width={"100%"} justifyContent={"space-between"}>
+					<Box>
+						<Text fontSize="xs" color="whiteAlpha.800" fontWeight="light">
+							{content}
+						</Text>
+					</Box>
+					<Box>
+						{image && (
+							<Image
+								src={image}
+								objectFit="cover"
+								objectPosition="center"
+								w="50px"
+								h="50px"
+								mr="10px"
+								cursor="pointer"
+								borderRadius={2.5}
+								onClick={onOpen}
+							/>
+						)}
+					</Box>
+				</Flex>
+				{/*?/ modal image  */}
+				<Modal isOpen={isOpen} onClose={onClose}>
+					<ModalOverlay />
+					<ModalContent>
+						{/* <ModalHeader color={"white"}>{user.fullname}</ModalHeader> */}
+						{/* <ModalCloseButton m={2} bg={"#FF605C"} color={"white"} /> */}
+						<ModalBody m={0} p={0}>
+							{image && <Image src={image} alt={user.fullname} />}
+						</ModalBody>
+					</ModalContent>
+				</Modal>
 				<HStack spacing={6}>
 					<HStack
 						onClick={handleLike}

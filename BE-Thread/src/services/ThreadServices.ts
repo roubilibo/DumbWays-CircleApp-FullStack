@@ -14,13 +14,18 @@ class ThreadServices {
 	async find(req: Request, res: Response): Promise<Response> {
 		try {
 			const threads = await this.ThreadRepository.find({
-				relations: ["user", "replies", "likes"],
-				select: {
-					user: {
-						id: true,
-						fullname: true,
-						email: true,
-					},
+				relations: ["user", "replies", "likes", "replies.user"],
+				// select: {
+				// 	user: {
+				// 		id: true,
+				// 		fullname: true,
+				// 		email: true,
+				// 		profile_picture: true,
+				// 		username: true,
+				// 	},
+				// },
+				order: {
+					created_at: "DESC",
 				},
 			});
 			return res.status(200).json({ code: 200, data: threads });
