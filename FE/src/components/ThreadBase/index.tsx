@@ -7,7 +7,6 @@ import {
 	Modal,
 	ModalBody,
 	ModalContent,
-	ModalOverlay,
 	Text,
 	useDisclosure,
 } from "@chakra-ui/react";
@@ -39,6 +38,7 @@ function ThreadDetail(props: ThreadAPI) {
 	}
 
 	return (
+		/* Hide the default scrollbar */
 		<Flex gap={3} borderBottom="1px solid gray">
 			<Avatar size="sm" name={user.fullname} src={user.profile_picture} />
 			<Box mb={4} w={"full"}>
@@ -58,23 +58,6 @@ function ThreadDetail(props: ThreadAPI) {
 						</Text>
 					</Text>
 				</HStack>
-				{/* <Text fontSize="xs" color="whiteAlpha.800" fontWeight="light">
-					{content}
-				</Text>
-				{image && (
-					<Image
-						src={image}
-						objectFit="cover"
-						objectPosition="top right"
-						w="50px"
-						h="50px"
-						position="absolute"
-						top="0"
-						right="0"
-						cursor="pointer"
-						onClick={onOpen}
-					/>
-				)} */}
 				<Flex width={"100%"} justifyContent={"space-between"}>
 					<Box>
 						<Text fontSize="xs" color="whiteAlpha.800" fontWeight="light">
@@ -99,7 +82,7 @@ function ThreadDetail(props: ThreadAPI) {
 				</Flex>
 				{/*?/ modal image  */}
 				<Modal isOpen={isOpen} onClose={onClose}>
-					<ModalOverlay />
+					{/* <ModalOverlay /> */}
 					<ModalContent>
 						{/* <ModalHeader color={"white"}>{user.fullname}</ModalHeader> */}
 						{/* <ModalCloseButton m={2} bg={"#FF605C"} color={"white"} /> */}

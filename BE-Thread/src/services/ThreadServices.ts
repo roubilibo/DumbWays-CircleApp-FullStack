@@ -6,6 +6,8 @@ import {
 	createTHreadSchema,
 	updateTHreadSchema,
 } from "../utils/Validator/Threads";
+import { uploadToCloudinary } from "../utils/Cloudinary/Cloudinary";
+import { deleteFile } from "../utils/Cloudinary/FIleHelper";
 
 class ThreadServices {
 	private readonly ThreadRepository: Repository<Thread> =
@@ -36,20 +38,33 @@ class ThreadServices {
 
 	async create(req: Request, res: Response): Promise<Response> {
 		try {
-			const data = req.body;
+			// const data = req.body;
+			const data = {
+				content: req.body.content,
+				image: req.file.path,
+				user: res.locals.loginSession.user.id,
+			};
 
 			const { error, value } = createTHreadSchema.validate(data);
 			if (error) {
 				return res.status(400).json({ error: error.details[0].message });
 			}
+			let image =
+				"https://res.cloudinary.com/dtha7yn1x/image/upload/v1696230488/IMG_20200329_164405_vpmtan.jpg";
+
+			if (req.file?.filename) {
+				image = await uploadToCloudinary(req.file);
+
+				deleteFile(req.file.path);
+			}
 			console.log(value);
 			const thread = this.ThreadRepository.create({
 				content: value.content,
-				image: value.image,
-				user: value.user,
+				image: image,
+				user: res.locals.loginSession.user.id,
 			});
 			const createThread = await this.ThreadRepository.save(thread);
-			return res.status(200).json(createThread);
+			return res.status(200).json({ code: 200, data: createThread });
 		} catch (error) {
 			res.status(500).json({ error: "error while creating thread" });
 		}
