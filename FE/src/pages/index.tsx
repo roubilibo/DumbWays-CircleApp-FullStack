@@ -12,11 +12,11 @@ import {
 	Stack,
 	Text,
 } from "@chakra-ui/react";
-import Navbar from "../../components/Navbar";
-import Suggested from "../../components/SuggestedList";
-import Profile from "../../components/Profile";
-import Thread from "../../components/Thread";
-import ThreadDetail from "../../components/ThreadBase";
+import Navbar from "../components/Navbar";
+import Suggested from "../components/SuggestedList";
+import Profile from "../components/Profile";
+import Thread from "../components/Thread";
+import ThreadDetail from "../components/ThreadBase";
 import { BsDot, BsFacebook, BsArrowLeftShort } from "react-icons/bs";
 import { BiImageAdd } from "react-icons/bi";
 import { AiFillLinkedin, AiFillGithub, AiFillInstagram } from "react-icons/ai";
@@ -24,7 +24,7 @@ import { useState } from "react";
 // import data from '../../mocks/thread.json'
 import { useEffect } from "react";
 import { API } from "@/libs/API";
-import ThreadAPI from "@/components/Types/ThreadAPI";
+import ThreadAPI from "@/Types/ThreadAPI";
 import { ChangeEvent } from "react";
 
 type formInputData = {

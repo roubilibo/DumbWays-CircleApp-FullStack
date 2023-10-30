@@ -2,7 +2,7 @@ import { Box, Button, HStack, Heading, Stack, Text } from "@chakra-ui/react";
 import { AiOutlineUser, AiOutlineHeart, AiOutlineHome } from "react-icons/ai";
 import { TbUserSearch } from "react-icons/tb";
 import { BiLogOut } from "react-icons/bi";
-import LoginForm from "../Login";
+// import LoginForm from "../../Features/Auth/components/LoginForm";
 
 function Navbar() {
 	return (
@@ -32,7 +32,7 @@ function Navbar() {
 					</Button>
 				</Stack>
 			</Box>
-			<LoginForm />
+			{/* <LoginForm /> */}
 			<Button
 				fontWeight="light"
 				color="white"

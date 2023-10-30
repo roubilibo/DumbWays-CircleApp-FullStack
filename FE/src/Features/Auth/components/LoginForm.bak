@@ -11,22 +11,29 @@ import {
 	ModalOverlay,
 	Text,
 } from "@chakra-ui/react";
+import { useLogin } from "../Hooks/useLogin";
 
 function LoginForm() {
 	const [isOpen, setIsOpen] = useState(false);
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const { handleChange, handleLogin } = useLogin();
+	// const [email, setEmail] = useState("");
+	// const [password, setPassword] = useState("");
 
 	const handleOpen = () => setIsOpen(true);
 	const handleClose = () => setIsOpen(false);
 
-	const handleSubmit = (e: { preventDefault: () => void }) => {
-		e.preventDefault();
-		// Lakukan proses login di sini
-		console.log("Email:", email);
-		console.log("Password:", password);
-		handleClose();
-	};
+	// const handleSubmit = (e: { preventDefault: () => void }) => {
+	// 	e.preventDefault();
+	// 	// Lakukan proses login di sini
+	// 	console.log("Email:", email);
+	// 	console.log("Password:", password);
+	// 	handleClose();
+	// };
+	// const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
+	// 	if (e.key === "Enter") {
+	// 		handleLogin();
+	// 	}
+	// };
 
 	return (
 		<>
@@ -47,15 +54,19 @@ function LoginForm() {
 					<ModalCloseButton m={2} bg={"#FF605C"} color={"white"} />
 
 					<ModalBody mb={2}>
-						<FormControl onSubmit={handleSubmit}>
+						<FormControl 
+						// onSubmit={handleSubmit}
+						>
 							<Text color={"white"} mb={2}>
 								Email:
 							</Text>
 							<Input
 								type="email"
-								value={email}
+								name="email"
+								// value={email}
 								color={"white"}
-								onChange={(e) => setEmail(e.target.value)}
+								onChange={handleChange}
+								// onChange={(e) => setEmail(e.target.value)}
 							/>
 
 							<Text color={"white"} mb={2} mt={4}>
@@ -63,9 +74,11 @@ function LoginForm() {
 							</Text>
 							<Input
 								type="password"
-								value={password}
+								name="password"
+								// value={password}
 								color={"white"}
-								onChange={(e) => setPassword(e.target.value)}
+								onChange={handleChange}
+								// onChange={(e) => setPassword(e.target.value)}
 							/>
 
 							<Button
@@ -74,7 +87,8 @@ function LoginForm() {
 								type="submit"
 								mt={4}
 								size={"sm"}
-								textAlign={"center"}>
+								textAlign={"center"}
+								onClick={handleLogin}>
 								Login
 							</Button>
 						</FormControl>

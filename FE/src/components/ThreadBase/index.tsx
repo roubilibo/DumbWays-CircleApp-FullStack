@@ -14,7 +14,7 @@ import { BsDot } from "react-icons/bs";
 import { AiFillHeart } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
 import { useState } from "react";
-import ThreadAPI from "../Types/ThreadAPI";
+import ThreadAPI from "../../Types/ThreadAPI";
 
 // interface IProps {
 //     image?: string;
