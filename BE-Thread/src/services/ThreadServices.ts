@@ -41,7 +41,7 @@ class ThreadServices {
 			// const data = req.body;
 			const data = {
 				content: req.body.content,
-				image: req.file.path,
+				image: req.file?.path || "",
 				user: res.locals.loginSession.user.id,
 			};
 
@@ -49,8 +49,7 @@ class ThreadServices {
 			if (error) {
 				return res.status(400).json({ error: error.details[0].message });
 			}
-			let image =
-				"https://res.cloudinary.com/dtha7yn1x/image/upload/v1696230488/IMG_20200329_164405_vpmtan.jpg";
+			let image = "";
 
 			if (req.file?.filename) {
 				image = await uploadToCloudinary(req.file);

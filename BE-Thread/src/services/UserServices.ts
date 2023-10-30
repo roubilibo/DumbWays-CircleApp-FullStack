@@ -185,6 +185,19 @@ class UserServices {
 			return res.status(401).json({ error: "Unauthorized" });
 		}
 	}
+
+	async logout(req: Request, res: Response): Promise<Response> {
+		try {
+			// Clear the user's session or token here
+			// For example, if you're using cookies:
+			res.clearCookie("session");
+			// return res.status(200).redirect("/auth/login");
+			return res.status(200).json({ message: "Logout successful" });
+		} catch (error) {
+			console.error(error);
+			return res.status(500).json({ error: "Internal server error" });
+		}
+	}
 }
 
 export default new UserServices();

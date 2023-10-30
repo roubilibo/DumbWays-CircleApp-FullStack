@@ -26,6 +26,9 @@ class UserControllers {
 	check(req: Request, res: Response) {
 		UserServices.check(req, res);
 	}
+	logout(req: Request, res: Response) {
+		UserServices.logout(req, res);
+	}
 }
 
 export default new UserControllers();

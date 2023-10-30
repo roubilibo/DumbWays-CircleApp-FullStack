@@ -14,6 +14,7 @@ import { useEffect, useRef } from "react";
 export default function LoginForm() {
 	const { handleChange, handleLogin } = useLogin();
 	const passwordInputRef = useRef<HTMLInputElement>(null);
+	// const [showPassword, setShowPassword] = useState(false);
 
 	useEffect(() => {
 		const handleKeyPress = (event: KeyboardEvent) => {
@@ -29,24 +30,31 @@ export default function LoginForm() {
 			passwordInputRef.current?.removeEventListener("keypress", handleKeyPress);
 		};
 	}, [handleLogin]);
+	// const handleTogglePasswordVisibility = () => {
+	// 	setShowPassword(!showPassword);
+	// };
 
 	return (
-		<Center bg={"black"} w={"100vw"} h="100vh">
+		<Center bg={"#333333"} w={"100vw"} h="100vh">
 			<Flex
 				direction="column"
-				bg={useColorModeValue("black", "white")}
-				color={useColorModeValue("white", "black")}
+				bg={useColorModeValue("#333333", " white")}
+				color={useColorModeValue("white", "#333333")}
 				padding={5}
-				borderRadius={10}
-				border="1px solid white">
+				// borderRadius={10}
+				// border="1px solid white"
+			>
 				<Text
 					color={"green"}
 					fontSize="2xl"
 					fontWeight="bold"
-					textAlign={"center"}
-					m={2}
-					mb={7}>
-					Login Circle
+					// textAlign={"center"}
+					m={0}
+					mb={0}>
+					Circle
+				</Text>
+				<Text fontSize={"md"} fontWeight={"bold"} mb={2}>
+					Login to Circle
 				</Text>
 				<FormControl
 					isRequired
@@ -75,7 +83,8 @@ export default function LoginForm() {
 						colorScheme="green"
 						color="white"
 						onClick={handleLogin}
-						mt={5}>
+						mt={5}
+						rounded={"full"}>
 						Login
 					</Button>
 				</FormControl>

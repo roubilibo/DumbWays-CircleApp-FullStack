@@ -2,9 +2,11 @@ import { Box, Button, HStack, Heading, Stack, Text } from "@chakra-ui/react";
 import { AiOutlineUser, AiOutlineHeart, AiOutlineHome } from "react-icons/ai";
 import { TbUserSearch } from "react-icons/tb";
 import { BiLogOut } from "react-icons/bi";
+import { useLogout } from "@/Features/Auth/Hooks/useLogout";
 // import LoginForm from "../../Features/Auth/components/LoginForm";
 
 function Navbar() {
+	const { loading, handleLogout } = useLogout();
 	return (
 		<Stack h="full" justify="space-between">
 			<Box>
@@ -40,8 +42,11 @@ function Navbar() {
 				justifyContent="start"
 				leftIcon={<BiLogOut size={30} />}
 				colorScheme="teal"
-				variant="unstyled">
-				Logout
+				variant="unstyled"
+				onClick={handleLogout}
+				disabled={loading}>
+				{loading ? "Loading..." : "Logout"}
+				{/* Logout */}
 			</Button>
 		</Stack>
 	);

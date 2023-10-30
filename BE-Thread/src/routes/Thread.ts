@@ -5,7 +5,7 @@ import uploadImage from "../middlewares/UploadImage";
 import Auth from "../middlewares/Auth";
 
 const router = Router();
-router.get("/threads", Auth.authenticate, ThreadControllers.find);
+router.get("/threads", ThreadControllers.find);
 router.get("/thread/:id", ThreadControllers.findOne);
 router.post(
 	"/thread",

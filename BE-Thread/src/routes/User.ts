@@ -11,4 +11,5 @@ UserRouter.delete("/user/:id", UserControllers.delete);
 UserRouter.post("/register", UserControllers.register);
 UserRouter.post("/login", UserControllers.login);
 UserRouter.get("/auth/check", Auth.authenticate, UserControllers.check);
+UserRouter.post("/logout", UserControllers.logout);
 export default UserRouter;
