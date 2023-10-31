@@ -9,8 +9,11 @@ export default function Login() {
 			display={"flex"}
 			flexDirection={"column"}
 			alignItems={"center"}
-			marginTop={"50px"}
-			color={"white"}>
+			// marginTop={"50px"}
+			justifyContent={"center"}
+			color={"white"}
+			w={"100vw"}
+			h="100vh">
 			<LoginForm />
 			<Box display={"flex"} gap={2}>
 				<Text>Don't have an account yet?</Text>

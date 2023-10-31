@@ -16,8 +16,10 @@ export function UseRegister() {
 
 	async function handleRegister() {
 		try {
-			const response = await API.post("/auth/register", form);
+			const response = await API.post("/register", form);
 			console.log(response);
+
+			window.location.href = "/auth/login";
 		} catch (error) {
 			console.log(error);
 		}

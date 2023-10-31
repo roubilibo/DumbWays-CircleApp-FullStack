@@ -29,10 +29,10 @@ export class User {
 	@Column({ type: "text", select: false })
 	password: string;
 
-	@Column({ type: "text" })
+	@Column({ type: "text", nullable: true })
 	profile_picture: string;
 
-	@Column({ length: 250 })
+	@Column({ length: 250, nullable: true })
 	bio: string;
 
 	@CreateDateColumn({ type: "timestamp with time zone" })

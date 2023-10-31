@@ -16,8 +16,8 @@ export const createUserSchema = Joi.object({
 	fullname: Joi.string().required(),
 	email: Joi.string().required(),
 	password: Joi.string().required(),
-	profile_picture: Joi.string(),
-	bio: Joi.string(),
+	profile_picture: Joi.string().allow(null, ""),
+	bio: Joi.string().allow(null, ""),
 });
 
 export const createReplySchema = Joi.object({

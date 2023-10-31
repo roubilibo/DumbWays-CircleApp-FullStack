@@ -1,14 +1,18 @@
 import LikeAPI from "./LikeAPI";
 import ReplyAPI from "./ReplyAPI";
-import UserAPI from "./UserAPI";
+import { UserAPI } from "./UserAPI";
 
-type ThreadAPI = {
+export type ThreadApi = {
 	id: number;
 	content: string;
 	image: string;
 	user: UserAPI;
-	replies: ReplyAPI[];
-	likes: LikeAPI[];
+	replies?: ReplyAPI[];
+	likes?: LikeAPI[];
 };
 
-export default ThreadAPI;
+export type ThreadPost = {
+	content: string;
+	image: string | Blob | MediaSource;
+	user: number;
+};

@@ -4,9 +4,11 @@ import {
 	Button,
 	Card,
 	Flex,
+	FormControl,
 	Grid,
 	GridItem,
 	HStack,
+	IconButton,
 	Image,
 	Input,
 	Stack,
@@ -20,12 +22,14 @@ import ThreadDetail from "../components/ThreadBase";
 import { BsDot, BsFacebook, BsArrowLeftShort } from "react-icons/bs";
 import { BiImageAdd } from "react-icons/bi";
 import { AiFillLinkedin, AiFillGithub, AiFillInstagram } from "react-icons/ai";
-import { useState } from "react";
+import { useRef, useState } from "react";
 // import data from '../../mocks/thread.json'
 import { useEffect } from "react";
 import { API } from "@/libs/API";
-import ThreadAPI from "@/Types/ThreadAPI";
+import { ThreadApi } from "@/Types/ThreadAPI";
 import { ChangeEvent } from "react";
+import { useThreads } from "@/Features/Threads/Hooks/useThreads";
+// import ThreadForm from "@/Features/Threads/components/ThreadForm";
 
 type formInputData = {
 	content: string;
@@ -34,6 +38,7 @@ type formInputData = {
 };
 
 function Home() {
+	const { fileInputRef, handleButtonClick } = useThreads();
 	const [detail, setDetail] = useState(false);
 	const [data, setData] = useState([]);
 	const [form, setForm] = useState<formInputData>({
@@ -60,11 +65,21 @@ function Home() {
 	async function handlePost() {
 		console.log(form);
 		await API.post("/thread", form);
-		// refetch()
+		// refetch();
 	}
+	// const fileInputRef = useRef<HTMLInputElement>(null);
+
+	// function handleButtonClick() {
+	// 	fileInputRef.current?.click();
+	// }
 
 	return (
-		<Grid gridTemplateColumns="270px 1.5fr 1.1fr" bg="blackAlpha.800" h="100vh">
+		<Grid
+			gridTemplateColumns="0.8fr 1.5fr 1.1fr"
+			// templateColumns="repeat(3, 1fr)"
+			// bg="blackAlpha.800"
+			h="100vh"
+			w={"100vw"}>
 			<GridItem px={6} py={4} borderRight="1px solid gray">
 				<Navbar />
 			</GridItem>
@@ -74,48 +89,80 @@ function Home() {
 					<Text color="white" fontSize="lg">
 						Home
 					</Text>
-					<HStack mt={5} justify="space-between">
-						<HStack>
-							<Avatar size="sm" mr={3} />
-							<Input
-								variant="unstyled"
-								color="whiteAlpha.400"
-								placeholder="What is happening?!"
-								_focus={{ color: "white" }}
-								name="content"
-								onChange={handleChange}
-							/>
-							<Input
-								name="image"
-								placeholder="Image URL"
-								color={"white"}
-								onChange={handleChange}
-							/>
-							<Input
-								name="user"
-								placeholder="User ID"
-								color={"white"}
-								onChange={handleChange}
-							/>
-						</HStack>
-						<HStack>
-							<Box cursor="pointer">
-								<BiImageAdd size={25} color="green" />
-							</Box>
-							<Button
-								colorScheme="whatsapp"
-								size="xs"
-								px={3}
-								rounded="full"
-								onClick={handlePost}>
-								Post
-							</Button>
-						</HStack>
-					</HStack>
 
+					{/* <ThreadForm /> */}
+					<form encType="multipart/form-data">
+						<FormControl>
+							<HStack mt={5} justify="space-between">
+								<HStack>
+									<Avatar size="sm" mr={3} />
+									<Input
+										variant="unstyled"
+										color="whiteAlpha.400"
+										placeholder="What is happening?!"
+										_focus={{ color: "white" }}
+										name="content"
+										onChange={handleChange}
+									/>
+								</HStack>
+								<HStack>
+									<Box cursor="pointer">
+										{/* <BiImageAdd
+											size={25}
+											color="green"
+											name="image"
+											// onClick={handleClick}
+										/> */}
+										<IconButton
+											bg={"transparent"}
+											outline={"none"}
+											aria-label="Add Image"
+											// name="image"
+											onClick={handleButtonClick}
+											icon={<BiImageAdd size={25} color="green" />}
+										/>
+										<Input
+											type="file"
+											name="image"
+											onChange={handleChange}
+											style={{ display: "none" }}
+											ref={fileInputRef}
+										/>
+										{/* <IconButton
+											bg={"transparent"}
+											outline={"none"}
+											aria-label="Add Image"
+											name="image"
+											icon={<BiImageAdd size={25} color="green" />}
+											onClick={handleImageClick}
+										/> */}
+										{/* <Button
+											variant={"ghost"}
+											color={"brand.green"}
+											onClick={handleButtonClick}>
+											<BiImageAdd
+												style={{
+													height: "50px",
+													width: "50px",
+												}}
+											/>
+										</Button> */}
+									</Box>
+									<Button
+										colorScheme="whatsapp"
+										size="xs"
+										px={3}
+										rounded="full"
+										onClick={handlePost}>
+										Post
+									</Button>
+								</HStack>
+							</HStack>
+						</FormControl>
+					</form>
 					<Stack mt={6}>
 						{data &&
-							data.map((e: ThreadAPI) => (
+							data?.map((e: ThreadApi) => (
 								<ThreadDetail
 									// key={e.id}
 									// onClick={() => setDetail(true)}

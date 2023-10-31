@@ -111,13 +111,13 @@ class UserServices {
 				fullname: value.fullname,
 				email: value.email,
 				password: password,
-				profile_picture: value.profile_picture,
-				bio: value.bio,
+				// profile_picture: value.profile_picture,
+				// bio: value.bio,
 			});
 			const createUser = await this.UserRepository.save(user);
 			return res.status(200).json(createUser);
 		} catch (error) {
-			return res.status(400).json({ error: error.details[0].message });
+			return res.status(400).json({ error });
 		}
 	}
 

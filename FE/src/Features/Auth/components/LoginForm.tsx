@@ -5,15 +5,17 @@ import {
 	Input,
 	Text,
 	Button,
-	useColorModeValue,
+	// useColorModeValue,
 	Center,
 } from "@chakra-ui/react";
 import { useLogin } from "../Hooks/useLogin";
 import { useEffect, useRef } from "react";
+// import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
 	const { handleChange, handleLogin } = useLogin();
 	const passwordInputRef = useRef<HTMLInputElement>(null);
+	// const navigate = useNavigate();
 	// const [showPassword, setShowPassword] = useState(false);
 
 	useEffect(() => {
@@ -35,11 +37,11 @@ export default function LoginForm() {
 	// };
 
 	return (
-		<Center bg={"#333333"} w={"100vw"} h="100vh">
+		<Center >
 			<Flex
 				direction="column"
-				bg={useColorModeValue("#333333", " white")}
-				color={useColorModeValue("white", "#333333")}
+				// bg={useColorModeValue("#222", " white")}
+				// color={useColorModeValue("white", "#222")}
 				padding={5}
 				// borderRadius={10}
 				// border="1px solid white"
@@ -91,6 +93,15 @@ export default function LoginForm() {
 				<Box display="flex" justifyContent="flex-end">
 					<Text>Forgot password?</Text>
 				</Box>
+				{/* <Box>
+					<Text>Don't have an account yet?</Text>
+					<Text
+						color={"green"}
+						cursor={"pointer"}
+						onClick={() => navigate("/auth/register")}>
+						Create account
+					</Text>
+				</Box> */}
 			</Flex>
 		</Center>
 	);

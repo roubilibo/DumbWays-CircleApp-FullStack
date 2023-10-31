@@ -1,9 +1,9 @@
-import ThreadAPI from "./ThreadAPI";
-import UserAPI from "./UserAPI";
+import { ThreadApi } from "./ThreadAPI";
+import { UserAPI } from "./UserAPI";
 
 type LikeAPI = {
 	id: number;
-	thread: ThreadAPI;
+	thread: ThreadApi;
 	user: UserAPI;
 };
 

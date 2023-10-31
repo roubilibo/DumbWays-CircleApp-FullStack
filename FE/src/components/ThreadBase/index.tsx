@@ -99,13 +99,13 @@ function ThreadDetail(props: ThreadAPI) {
 						mt={2}>
 						<AiFillHeart size={20} color={like ? "red" : ""} />
 						<Text fontSize="sm" color="whiteAlpha.600">
-							{likes.length}
+							{likes?.length}
 						</Text>
 					</HStack>
 					<HStack cursor="pointer" color="whiteAlpha.600" mt={2}>
 						<BiCommentDetail size={20} />
 						<Text fontSize="sm" color="whiteAlpha.600">
-							{replies.length}
+							{replies?.length}
 						</Text>
 					</HStack>
 				</HStack>
