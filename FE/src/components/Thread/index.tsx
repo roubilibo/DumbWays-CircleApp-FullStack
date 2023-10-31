@@ -11,7 +11,8 @@ import {
 import { AiFillHeart } from "react-icons/ai";
 import { BiCommentDetail, BiImageAdd } from "react-icons/bi";
 import { BsDot } from "react-icons/bs";
-import ThreadDetail from "../ThreadBase";
+// import ThreadDetail from "../ThreadBase";
+import BaseThread from "@/Features/Threads/components/Thread";
 
 function Thread() {
 	return (
@@ -81,7 +82,7 @@ function Thread() {
 				</HStack>
 
 				<Stack mt={8}>
-					<ThreadDetail
+					<BaseThread
 						comment={100}
 						likes={389}
 						name="Indah Pra Karya"

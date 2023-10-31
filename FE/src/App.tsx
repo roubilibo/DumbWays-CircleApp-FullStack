@@ -1,5 +1,5 @@
 import { Box, ChakraProvider, extendTheme } from "@chakra-ui/react";
-import Home from "./pages";
+import Home from "./pages/Home";
 import {
 	// BrowserRouter,
 	Navigate,

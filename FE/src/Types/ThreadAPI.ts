@@ -9,6 +9,7 @@ export type ThreadApi = {
 	user: UserAPI;
 	replies?: ReplyAPI[];
 	likes?: LikeAPI[];
+	created_at?: string;
 };
 
 export type ThreadPost = {
