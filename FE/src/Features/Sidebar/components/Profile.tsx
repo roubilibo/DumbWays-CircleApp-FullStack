@@ -26,8 +26,10 @@ function Profile() {
 				h="70px"
 				mt={3}
 				rounded="xl"
-				bg="green" //linear-gradient(to top, #96fbc4 0%, #f9f586 100%)
-			>
+				//bg="linear-gradient(to top, #96fbc4 0%, #f9f586 100%)" //linear-gradient(to top, #96fbc4 0%, #f9f586 100%)
+				bgImage={
+					"https://res.cloudinary.com/dtha7yn1x/image/upload/v1698820513/Threads/mrhp1gthjea5ijuvpxt8.jpg"
+				}>
 				<Box
 					pos="absolute"
 					bottom={-6}
