@@ -1,53 +1,26 @@
-import { API } from "@/libs/API";
 import {
 	Avatar,
 	Box,
 	Button,
 	FormControl,
 	HStack,
-	IconButton,
-	// IconButton,
 	Input,
 } from "@chakra-ui/react";
-import { useRef, useState, ChangeEvent } from "react";
 import { BiImageAdd } from "react-icons/bi";
-
-type formInputData = {
-	content: string;
-};
+import { usePostThread } from "../Hooks/usePostThread";
 
 export default function ThreadForm() {
-	const fileInputRef = useRef<HTMLInputElement>(null);
-
-	function handleButtonClick() {
-		fileInputRef.current?.click();
-	}
-
-	const [form, setForm] = useState<formInputData>({
-		content: "",
-	});
-
-	const [image, setImage] = useState<File | null>(null);
-
-	function handleChange(e: ChangeEvent<HTMLInputElement>) {
-		setForm({
-			...form,
-			[e.target.name]: e.target.files ? e.target.files : e.target.value,
-		});
-	}
-
-	async function handlePost() {
-		console.log(form);
-		const formData = new FormData();
-		if (image) {
-			formData.append("image", image);
-		}
-		formData.append("content", form.content);
-		await API.post("/thread", formData);
-	}
+	const {
+		handleButtonClick,
+		handleChange,
+		handlePost,
+		setImage,
+		isPending,
+		fileInputRef,
+	} = usePostThread();
 
 	return (
-		<form onSubmit={handlePost} encType="multipart/form-data">
+		<form encType="multipart/form-data">
 			<FormControl>
 				<HStack mt={5} justify="space-between">
 					<HStack>
@@ -63,14 +36,7 @@ export default function ThreadForm() {
 					</HStack>
 					<HStack>
 						<Box cursor="pointer">
-							<IconButton
-								bg={"transparent"}
-								outline={"none"}
-								aria-label="Add Image"
-								// name="image"
-								onClick={handleButtonClick}
-								icon={<BiImageAdd size={25} color="green" />}
-							/>
+							<BiImageAdd size={25} color="green" onClick={handleButtonClick} />
 							<Input
 								type="file"
 								name="image"
@@ -90,7 +56,8 @@ export default function ThreadForm() {
 							size="xs"
 							px={3}
 							rounded="full"
-							type="submit">
+							onClick={() => handlePost()}
+							isLoading={isPending}>
 							Post
 						</Button>
 					</HStack>

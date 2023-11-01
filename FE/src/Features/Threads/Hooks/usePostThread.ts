@@ -41,29 +41,6 @@ export function usePostThread() {
 			setImage(null);
 		},
 	});
-
-	// async function handlePost() {
-	// 	// setIsPosting(true);
-	// 	try {
-	// 		console.log(form);
-	// 		const formData = new FormData();
-	// 		if (image) {
-	// 			formData.append("image", image);
-	// 		}
-	// 		formData.append("content", form.content);
-	// 		await API.post("/thread", formData);
-	// 		// refetch();
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	} finally {
-	// 		// setIsPosting(false);
-	// 		setForm({
-	// 			content: "",
-	// 		});
-	// 		setImage(null);
-	// 	}
-	// }
-
 	return {
 		handleButtonClick,
 		handleChange,
