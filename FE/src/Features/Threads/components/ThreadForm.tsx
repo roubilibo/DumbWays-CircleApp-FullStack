@@ -23,7 +23,7 @@ export default function ThreadForm() {
 		<form encType="multipart/form-data">
 			<FormControl>
 				<HStack mt={5} justify="space-between">
-					<HStack>
+					<HStack w={"full"}>
 						<Avatar size="sm" mr={3} />
 						<Input
 							variant="unstyled"
