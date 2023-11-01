@@ -17,6 +17,7 @@ import { API, setAuthToken } from "./libs/API";
 import { AUTH_CHECK, AUTH_ERROR } from "./store/RootReducer";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import AppLayout from "./layout/AppLayout";
 
 const theme = extendTheme({
 	styles: {
@@ -64,7 +65,7 @@ function App() {
 		if (!auth.username) {
 			return <Navigate to="/auth/login" />;
 		} else {
-			return <Outlet />;
+			return <AppLayout />;
 		}
 	}
 
@@ -81,7 +82,7 @@ function App() {
 				// <BrowserRouter>
 				<ChakraProvider theme={theme}>
 					<Routes>
-						<Route path="/" element={<IsNotLogin />}>
+						<Route element={<IsNotLogin />}>
 							<Route path="/" element={<Home />} />
 						</Route>
 						<Route path="/" element={<IsLogin />}>
