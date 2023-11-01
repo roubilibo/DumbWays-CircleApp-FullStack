@@ -54,7 +54,7 @@ function BaseThread(props: ThreadApi) {
 						cursor="pointer">
 						{user.fullname}
 						<Text fontWeight="light" display="flex" color="whiteAlpha.600">
-							{user.username} <BsDot color="gray" size={24} />
+							<BsDot color="gray" size={24} />@{user.username}
 							{/* {time} */}
 						</Text>
 					</Text>
@@ -84,19 +84,19 @@ function BaseThread(props: ThreadApi) {
 				{/*?/ modal image  */}
 				<Modal isOpen={isOpen} onClose={onClose}>
 					<ModalOverlay />
-					<ModalContent>
-						{/* <ModalBody m={0} p={0}> */}
-						{image && (
-							<Flex justifyContent="center" alignItems="center" height="100%">
-								<Image
-									src={image}
-									alt={user.fullname}
-									maxW="800px"
-									maxH="600px"
-								/>
-							</Flex>
-						)}
-						{/* </ModalBody> */}
+					<ModalContent bg="transparent">
+						<ModalBody m={0} p={0}>
+							{image && (
+								<Flex justifyContent="center" alignItems="center" height="100%">
+									<Image
+										src={image}
+										alt={user.fullname}
+										maxW="800px"
+										maxH="600px"
+									/>
+								</Flex>
+							)}
+						</ModalBody>
 					</ModalContent>
 				</Modal>
 				<HStack spacing={6}>

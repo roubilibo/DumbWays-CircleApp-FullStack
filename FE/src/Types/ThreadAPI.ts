@@ -14,6 +14,6 @@ export type ThreadApi = {
 
 export type ThreadPost = {
 	content: string;
-	image: string | Blob | MediaSource;
-	user: number;
+	// image: string | Blob | MediaSource;
+	// user: number;
 };

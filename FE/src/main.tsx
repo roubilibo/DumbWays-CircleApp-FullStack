@@ -8,6 +8,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./store/RootReducer.ts";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const client = new QueryClient();
 
@@ -18,6 +19,7 @@ const store = configureStore({
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
 		<QueryClientProvider client={client}>
+			<ReactQueryDevtools initialIsOpen={false} />
 			<Router>
 				<Provider store={store}>
 					<ChakraProvider>

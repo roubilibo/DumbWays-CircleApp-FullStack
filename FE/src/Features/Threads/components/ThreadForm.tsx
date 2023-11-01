@@ -1,3 +1,4 @@
+import { API } from "@/libs/API";
 import {
 	Avatar,
 	Box,
@@ -8,12 +9,42 @@ import {
 	// IconButton,
 	Input,
 } from "@chakra-ui/react";
-import { useThreads } from "../Hooks/useThreads";
+import { useRef, useState, ChangeEvent } from "react";
 import { BiImageAdd } from "react-icons/bi";
 
+type formInputData = {
+	content: string;
+};
+
 export default function ThreadForm() {
-	const { handlePost, handleChange, fileInputRef, handleButtonClick } =
-		useThreads();
+	const fileInputRef = useRef<HTMLInputElement>(null);
+
+	function handleButtonClick() {
+		fileInputRef.current?.click();
+	}
+
+	const [form, setForm] = useState<formInputData>({
+		content: "",
+	});
+
+	const [image, setImage] = useState<File | null>(null);
+
+	function handleChange(e: ChangeEvent<HTMLInputElement>) {
+		setForm({
+			...form,
+			[e.target.name]: e.target.files ? e.target.files : e.target.value,
+		});
+	}
+
+	async function handlePost() {
+		console.log(form);
+		const formData = new FormData();
+		if (image) {
+			formData.append("image", image);
+		}
+		formData.append("content", form.content);
+		await API.post("/thread", formData);
+	}
 
 	return (
 		<form onSubmit={handlePost} encType="multipart/form-data">
@@ -43,21 +74,16 @@ export default function ThreadForm() {
 							<Input
 								type="file"
 								name="image"
-								onChange={handleChange}
+								onChange={(e) => {
+									if (e.target?.files) {
+										setImage(e.target?.files[0]);
+									} else {
+										setImage(null);
+									}
+								}}
 								style={{ display: "none" }}
 								ref={fileInputRef}
 							/>
-							{/* <Button
-								variant={"ghost"}
-								color={"brand.green"}
-								onClick={handleButtonClick}>
-								<BiImageAdd
-									style={{
-										height: "50px",
-										width: "50px",
-									}}
-								/>
-							</Button> */}
 						</Box>
 						<Button
 							colorScheme="whatsapp"

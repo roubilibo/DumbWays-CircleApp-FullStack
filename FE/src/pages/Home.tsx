@@ -6,7 +6,6 @@ import {
 	Grid,
 	GridItem,
 	HStack,
-	IconButton,
 	Input,
 	Stack,
 	Text,
@@ -16,56 +15,28 @@ import Suggested from "../components/SuggestedList";
 import Profile from "../Features/Sidebar/components/Profile";
 import { BsArrowLeftShort } from "react-icons/bs";
 import { BiImageAdd } from "react-icons/bi";
-import { useEffect, useRef, useState } from "react";
-import { API } from "@/libs/API";
+import { useState } from "react";
 import { ThreadApi } from "@/Types/ThreadAPI";
-import { ChangeEvent } from "react";
 import BaseThread from "@/Features/Threads/components/Thread";
 import Footer from "@/components/Footer";
-
-type formInputData = {
-	content: string;
-	// image?: string;
-	// user: number;
-};
+import { useGetThread } from "@/Features/Threads/Hooks/useGetThread";
+import { usePostThread } from "@/Features/Threads/Hooks/usePostThread";
 
 function Home() {
-	const fileInputRef = useRef<HTMLInputElement>(null);
+	const { getThread, isLoading } = useGetThread();
+	const {
+		handleButtonClick,
+		handleChange,
+		handlePost,
+		isPending,
+		setImage,
+		fileInputRef,
+	} = usePostThread();
 
-	function handleButtonClick() {
-		fileInputRef.current?.click();
-	}
-	const [data, setData] = useState([]);
 	const [detail, setDetail] = useState(false);
-	const [form, setForm] = useState<formInputData>({
-		content: "",
-	});
-	const [image, setImage] = useState<File | null>(null);
 
-	useEffect(() => {
-		const fetchData = async () => {
-			const response = await API.get("/threads");
-			setData(response.data.data);
-		};
-		fetchData();
-	}, [data]);
-
-	function handleChange(e: ChangeEvent<HTMLInputElement>) {
-		setForm({
-			...form,
-			[e.target.name]: e.target.files ? e.target.files : e.target.value,
-		});
-	}
-
-	async function handlePost() {
-		console.log(form);
-		const formData = new FormData();
-		if (image) {
-			formData.append("image", image);
-		}
-		formData.append("content", form.content);
-		await API.post("/thread", formData);
-		// refetch();
+	if (isLoading) {
+		return <div>Loading...</div>;
 	}
 
 	return (
@@ -97,13 +68,10 @@ function Home() {
 								</HStack>
 								<HStack>
 									<Box cursor="pointer">
-										<IconButton
-											bg={"transparent"}
-											outline={"none"}
-											aria-label="Add Image"
-											// name="image"
+										<BiImageAdd
+											size={25}
+											color="green"
 											onClick={handleButtonClick}
-											icon={<BiImageAdd size={25} color="green" />}
 										/>
 										<Input
 											type="file"
@@ -124,7 +92,8 @@ function Home() {
 										size="xs"
 										px={3}
 										rounded="full"
-										onClick={handlePost}>
+										onClick={() => handlePost()}
+										isLoading={isPending}>
 										Post
 									</Button>
 								</HStack>
@@ -132,8 +101,8 @@ function Home() {
 						</FormControl>
 					</form>
 					<Stack mt={6}>
-						{data &&
-							data?.map((e: ThreadApi) => (
+						{getThread &&
+							getThread?.map((e: ThreadApi) => (
 								<BaseThread
 									key={e.id}
 									id={e.id}

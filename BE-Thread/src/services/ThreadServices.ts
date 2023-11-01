@@ -30,7 +30,7 @@ class ThreadServices {
 					created_at: "DESC",
 				},
 			});
-			return res.status(200).json({ code: 200, data: threads });
+			return res.status(200).json(threads);
 		} catch (error) {
 			res.status(500).json({ error: "error while getting threads" });
 		}
