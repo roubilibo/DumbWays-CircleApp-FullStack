@@ -21,8 +21,7 @@ export const createUserSchema = Joi.object({
 });
 
 export const createReplySchema = Joi.object({
-	thread_id: Joi.number(),
-	user_id: Joi.number(),
+	thread: Joi.number(),
 	content: Joi.string(),
 	image: Joi.string().allow(""),
 });

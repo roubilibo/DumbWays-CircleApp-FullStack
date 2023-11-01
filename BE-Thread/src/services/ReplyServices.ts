@@ -6,6 +6,8 @@ import {
 	createReplySchema,
 	updateReplySchema,
 } from "../utils/Validator/Threads";
+import { uploadToCloudinary } from "../utils/Cloudinary/Cloudinary";
+import { deleteFile } from "../utils/Cloudinary/FIleHelper";
 class ReplysServices {
 	private readonly ReplyRepository: Repository<Reply> =
 		AppDataSource.getRepository(Reply);
@@ -26,7 +28,7 @@ class ReplysServices {
 					},
 				},
 			});
-			return res.status(200).json({ code: 200, dara: replies });
+			return res.status(200).json({ code: 200, data: replies });
 		} catch (error) {
 			res.status(500).json({ error: "error while getting replies" });
 		}
@@ -57,21 +59,32 @@ class ReplysServices {
 
 	async create(req: Request, res: Response): Promise<Response> {
 		try {
-			const data = req.body;
+			const data = {
+				content: req.body.content,
+				image: req.file?.path || null,
+			};
 			const { error, value } = createReplySchema.validate(data);
 			if (error) {
 				return res.status(400).json({ error: error.details[0].message });
 			}
+			let image = "";
+			if (req.file?.filename) {
+				image = await uploadToCloudinary(req.file);
+
+				deleteFile(req.file.path);
+			}
 			console.log(value);
 			const reply = this.ReplyRepository.create({
-				thread: value.thread_id,
+				thread: value.thread,
 				user: res.locals.loginSession.user.id,
 				content: value.content,
-				image: value.image,
+				image: image,
 			});
 			const createReply = await this.ReplyRepository.save(reply);
 			return res.status(200).json(createReply);
 		} catch (error) {
+			console.log(error);
+
 			res.status(500).json({ error: "error while creating reply" });
 		}
 	}
