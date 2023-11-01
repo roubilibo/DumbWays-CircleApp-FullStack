@@ -7,6 +7,7 @@ import {
 	Modal,
 	ModalBody,
 	ModalContent,
+	ModalOverlay,
 	Text,
 	useDisclosure,
 } from "@chakra-ui/react";
@@ -82,13 +83,20 @@ function BaseThread(props: ThreadApi) {
 				</Flex>
 				{/*?/ modal image  */}
 				<Modal isOpen={isOpen} onClose={onClose}>
-					{/* <ModalOverlay /> */}
+					<ModalOverlay />
 					<ModalContent>
-						{/* <ModalHeader color={"white"}>{user.fullname}</ModalHeader> */}
-						{/* <ModalCloseButton m={2} bg={"#FF605C"} color={"white"} /> */}
-						<ModalBody m={0} p={0}>
-							{image && <Image src={image} alt={user.fullname} />}
-						</ModalBody>
+						{/* <ModalBody m={0} p={0}> */}
+						{image && (
+							<Flex justifyContent="center" alignItems="center" height="100%">
+								<Image
+									src={image}
+									alt={user.fullname}
+									maxW="800px"
+									maxH="600px"
+								/>
+							</Flex>
+						)}
+						{/* </ModalBody> */}
 					</ModalContent>
 				</Modal>
 				<HStack spacing={6}>

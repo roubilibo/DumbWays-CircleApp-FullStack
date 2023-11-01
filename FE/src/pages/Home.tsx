@@ -2,36 +2,26 @@ import {
 	Avatar,
 	Box,
 	Button,
-	Card,
-	Flex,
 	FormControl,
 	Grid,
 	GridItem,
 	HStack,
 	IconButton,
-	Image,
 	Input,
 	Stack,
 	Text,
 } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
 import Suggested from "../components/SuggestedList";
-import Profile from "../components/Profile";
-import Thread from "../components/Thread";
-// import ThreadDetail from "../components/ThreadBase";
-import { BsDot, BsFacebook, BsArrowLeftShort } from "react-icons/bs";
+import Profile from "../Features/Sidebar/components/Profile";
+import { BsArrowLeftShort } from "react-icons/bs";
 import { BiImageAdd } from "react-icons/bi";
-import { AiFillLinkedin, AiFillGithub, AiFillInstagram } from "react-icons/ai";
 import { useEffect, useRef, useState } from "react";
-// import data from '../../mocks/thread.json'
-// import { useEffect } from "react";
 import { API } from "@/libs/API";
 import { ThreadApi } from "@/Types/ThreadAPI";
 import { ChangeEvent } from "react";
-// import { useThreads } from "@/Features/Threads/Hooks/useThreads";
-// import { useQuery } from "@tanstack/react-query";
 import BaseThread from "@/Features/Threads/components/Thread";
-// import ThreadForm from "@/Features/Threads/components/ThreadForm";
+import Footer from "@/components/Footer";
 
 type formInputData = {
 	content: string;
@@ -45,7 +35,6 @@ function Home() {
 	function handleButtonClick() {
 		fileInputRef.current?.click();
 	}
-	// const { fileInputRef, handleButtonClick } = useThreads();
 	const [data, setData] = useState([]);
 	const [detail, setDetail] = useState(false);
 	const [form, setForm] = useState<formInputData>({
@@ -80,12 +69,7 @@ function Home() {
 	}
 
 	return (
-		<Grid
-			gridTemplateColumns="0.8fr 1.5fr 1.1fr"
-			// templateColumns="repeat(3, 1fr)"
-			// bg="blackAlpha.800"
-			h="100vh"
-			w={"100vw"}>
+		<Grid gridTemplateColumns="0.8fr 1.5fr 1.1fr" h="100vh" w={"100vw"}>
 			<GridItem px={6} py={4} borderRight="1px solid gray">
 				<Navbar />
 			</GridItem>
@@ -151,16 +135,6 @@ function Home() {
 						{data &&
 							data?.map((e: ThreadApi) => (
 								<BaseThread
-									// key={e.id}
-									// onClick={() => setDetail(true)}
-									// comment={e.likes}
-									// likes={e.likes}
-									// name={e.name}
-									// time={'4h'}
-									// username={e.username}
-									// imgProfile="https://bit.ly/dan-abramov"
-									// content={e.content}
-									// onClick={() => setDetail(true)}
 									key={e.id}
 									id={e.id}
 									content={e.content}
@@ -186,9 +160,6 @@ function Home() {
 						Necessitatibus tempore rerum quae repellat hic explicabo architecto
 						eos nemo quod suscipit.
 					</HStack>
-					<Box mt={6}>
-						<Thread />
-					</Box>
 				</GridItem>
 			)}
 
@@ -197,33 +168,7 @@ function Home() {
 				<Box mt={4}>
 					<Suggested />
 
-					<Card mt={4} bg="whiteAlpha.200" p={3}>
-						<Flex>
-							<Text display="flex" fontSize="sm" gap={1} color="whiteAlpha.800">
-								Developedby <Text color="white">Your Name</Text>
-							</Text>
-							<Flex gap="3px" color="gray">
-								<BsDot size={24} />
-								<AiFillGithub size={20} />
-								<AiFillLinkedin size={20} />
-								<BsFacebook size={20} />
-								<AiFillInstagram size={20} />
-							</Flex>
-						</Flex>
-						<Text
-							fontSize="x-small"
-							color="whiteAlpha.600"
-							display="flex"
-							gap={2}>
-							Powered by{" "}
-							<Image
-								w="30px"
-								src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUW0u5Eiiy3oM6wcpeEE6sXCzlh8G-tX1_Iw&usqp=CAU"
-								alt="logo"
-							/>{" "}
-							Dumbways Indonesia #1Coding Bootcamp
-						</Text>
-					</Card>
+					<Footer />
 				</Box>
 			</GridItem>
 		</Grid>

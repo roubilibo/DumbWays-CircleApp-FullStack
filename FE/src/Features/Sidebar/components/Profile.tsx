@@ -1,3 +1,4 @@
+import { RootState } from "@/store/type/RootState";
 import {
 	Avatar,
 	Box,
@@ -8,6 +9,7 @@ import {
 	Stack,
 	Text,
 } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 
 //
 {
@@ -15,6 +17,7 @@ import {
 }
 
 function Profile() {
+	const user = useSelector((state: RootState) => state?.auth);
 	return (
 		<Card bg="whiteAlpha.200" p={4}>
 			<Text color="white">My Profile</Text>
@@ -32,7 +35,7 @@ function Profile() {
 					p={1}
 					bg="blackAlpha.800"
 					rounded="full">
-					<Avatar size="md" /> {/*src="https://bit.ly/dan-abramov"*/}
+					<Avatar size="md" name={user?.fullname} src={user?.profile_picture} />
 				</Box>
 			</Box>
 			<Flex justify="right" mt={-6}>
@@ -50,13 +53,13 @@ function Profile() {
 
 			<Stack spacing={0}>
 				<Text mt={3} fontSize="lg" fontWeight="semibold" color="white">
-					xxxxxxx
+					{user?.fullname}
 				</Text>
 				<Text fontSize="xs" color="whiteAlpha.600">
-					@xxxxxx
+					@{user?.username}
 				</Text>
 				<Text fontSize="sm" color="whiteAlpha.800">
-					picked over by the worms, and weird fishes
+					{user?.bio}
 				</Text>
 				<HStack fontSize="sm">
 					<HStack>
