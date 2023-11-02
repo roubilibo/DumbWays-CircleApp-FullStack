@@ -61,6 +61,7 @@ class ReplysServices {
 		try {
 			const data = {
 				content: req.body.content,
+				thread: req.body.thread,
 				image: req.file?.path || null,
 			};
 			const { error, value } = createReplySchema.validate(data);

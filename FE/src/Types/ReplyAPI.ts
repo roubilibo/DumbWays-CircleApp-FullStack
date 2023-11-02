@@ -13,3 +13,12 @@ export type PostReply = {
 	thread: number;
 	content: string;
 };
+
+export type Replies = {
+	content : string;
+	created_at : string;
+	id: number,
+	image: string;
+	user: UserAPI;
+	thread: ThreadApi;
+}

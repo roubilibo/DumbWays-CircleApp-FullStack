@@ -54,6 +54,7 @@ export default function ThreadDetail() {
 							<Box>
 								<Text
 									fontWeight="semibold"
+									fontSize={"lg"}
 									_hover={{
 										cursor: "pointer",
 									}}>
@@ -81,7 +82,7 @@ export default function ThreadDetail() {
 							)}
 
 							<Box my="2">
-								<Text fontSize="0.86rem">{getDetailThread.content}</Text>
+								<Text fontSize="sm">{getDetailThread.content}</Text>
 							</Box>
 							<Box>
 								<HStack fontSize="xs">
@@ -107,7 +108,7 @@ export default function ThreadDetail() {
 					</AbsoluteCenter>
 				</Box>
 			</Box>
-			<ReplyForm />
+			<ReplyForm threadReply={getDetailThread} />
 		</Box>
 	);
 }
