@@ -23,6 +23,12 @@ export default function ThreadForm() {
 		form,
 	} = usePostThread();
 
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		if (event.key === "Enter") {
+			handlePost();
+		}
+	};
+
 	return (
 		<form encType="multipart/form-data">
 			<FormControl>
@@ -50,6 +56,7 @@ export default function ThreadForm() {
 							rounded={"10"}
 							onChange={handleChange}
 							value={form.content}
+							onKeyDown={handleKeyDown}
 						/>
 					</HStack>
 					<HStack>

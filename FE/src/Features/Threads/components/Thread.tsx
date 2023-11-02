@@ -60,30 +60,30 @@ function BaseThread(props: ThreadApi) {
 						</Text>
 					</Text>
 				</HStack>
-				<Link to={`/thread/${id}`}>
-					<Flex width={"100%"} justifyContent={"space-between"}>
+				<Flex width={"100%"} justifyContent={"space-between"}>
+					<Link to={`/thread/${id}`}>
 						<Box>
 							<Text fontSize="xs" color="whiteAlpha.800" fontWeight="light">
 								{content}
 							</Text>
 						</Box>
-						<Box>
-							{image && (
-								<Image
-									src={image}
-									objectFit="cover"
-									objectPosition="center"
-									w="50px"
-									h="50px"
-									mr="10px"
-									cursor="pointer"
-									borderRadius={2.5}
-									onClick={onOpen}
-								/>
-							)}
-						</Box>
-					</Flex>
-				</Link>
+					</Link>
+					<Box>
+						{image && (
+							<Image
+								src={image}
+								objectFit="cover"
+								objectPosition="center"
+								w="50px"
+								h="50px"
+								mr="10px"
+								cursor="pointer"
+								borderRadius={2.5}
+								onClick={onOpen}
+							/>
+						)}
+					</Box>
+				</Flex>
 				{/*?/ modal image  */}
 				<Modal isOpen={isOpen} onClose={onClose}>
 					<ModalOverlay />

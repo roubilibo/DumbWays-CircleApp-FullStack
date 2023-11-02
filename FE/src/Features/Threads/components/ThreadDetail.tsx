@@ -103,7 +103,7 @@ export default function ThreadDetail() {
 
 				<Box position="relative" padding="10">
 					<Divider />
-					<AbsoluteCenter bg="gray.800" px="4">
+					<AbsoluteCenter bg="gray.800" px="4" rounded={"full"}>
 						Replies
 					</AbsoluteCenter>
 				</Box>
