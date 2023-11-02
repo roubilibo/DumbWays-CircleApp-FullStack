@@ -23,7 +23,7 @@ export const createUserSchema = Joi.object({
 export const createReplySchema = Joi.object({
 	thread: Joi.number(),
 	content: Joi.string(),
-	image: Joi.string().allow(""),
+	image: Joi.string().allow("", null),
 });
 
 export const updateReplySchema = Joi.object({

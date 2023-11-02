@@ -33,7 +33,7 @@ export function usePostReply() {
 			}
 			formData.append("content", form.content);
 			formData.append("thread", form.thread.toString());
-			await API.post("/thread", formData);
+			await API.post("/reply", formData);
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["thread-reply"] });

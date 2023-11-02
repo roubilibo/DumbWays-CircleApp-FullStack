@@ -3,6 +3,7 @@ import { AiOutlineUser, AiOutlineHeart, AiOutlineHome } from "react-icons/ai";
 import { TbUserSearch } from "react-icons/tb";
 import { BiLogOut } from "react-icons/bi";
 import { useLogout } from "@/Features/Auth/Hooks/useLogout";
+import { Link } from "react-router-dom";
 // import LoginForm from "../../Features/Auth/components/LoginForm";
 
 function Navbar() {
@@ -11,7 +12,9 @@ function Navbar() {
 	return (
 		<Stack h="full" justify="space-between">
 			<Box>
-				<Heading color="green">circle</Heading>
+				<Link to="/">
+					<Heading color="green">circle</Heading>
+				</Link>
 				<Stack mt={8} spacing={6}>
 					<HStack cursor="pointer" color="white">
 						<AiOutlineHome size={25} />
