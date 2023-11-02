@@ -32,6 +32,8 @@ export default function ReplyForm({ threadReply }: RepliesProps) {
 		fileInputRef,
 		form,
 	} = usePostReply();
+	// const [isModalOpen, setIsModalOpen] = useState(false);
+	// const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
 	return (
 		<>
@@ -119,6 +121,10 @@ export default function ReplyForm({ threadReply }: RepliesProps) {
 								alt="Dan Abramov"
 								rounded="md"
 								mb={3}
+								// onClick={() => {
+								// 	setIsModalOpen(true);
+								// 	setSelectedImage(reply.image);
+								// }}
 							/>
 						)}
 						<Text color={"white"} fontSize="xs">
@@ -126,6 +132,15 @@ export default function ReplyForm({ threadReply }: RepliesProps) {
 						</Text>
 					</Box>
 					<Divider />
+					{/* {isModalOpen && selectedImage && (
+						<Modal onClose={() => setIsModalOpen(false)}>
+							<ModalOverlay />
+							<ModalContent>
+								<ModalCloseButton />
+								<Image src={selectedImage} alt="Selected Image" />
+							</ModalContent>
+						</Modal>
+					)} */}
 				</Box>
 			))}
 		</>

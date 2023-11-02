@@ -16,10 +16,12 @@ function Navbar() {
 					<Heading color="green">circle</Heading>
 				</Link>
 				<Stack mt={8} spacing={6}>
-					<HStack cursor="pointer" color="white">
-						<AiOutlineHome size={25} />
-						<Text fontSize="sm  ">Home</Text>
-					</HStack>
+					<Link to="/">
+						<HStack cursor="pointer" color="white">
+							<AiOutlineHome size={25} />
+							<Text fontSize="sm  ">Home</Text>
+						</HStack>
+					</Link>
 					<HStack cursor="pointer" color="white">
 						<TbUserSearch size={25} />
 						<Text fontSize="sm  ">Search</Text>

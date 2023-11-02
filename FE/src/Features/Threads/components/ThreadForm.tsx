@@ -26,11 +26,18 @@ export default function ThreadForm() {
 	return (
 		<form encType="multipart/form-data">
 			<FormControl>
-				<HStack mt={5} justify="space-between">
+				<HStack
+					mt={5}
+					justify="space-between"
+					mb={15}
+					// bg={"#333333"}
+					border={"1px solid white"}
+					p={5}
+					rounded={"full"}>
 					<HStack w={"full"}>
 						<Avatar
-							size="sm"
-							mr={3}
+							size="lg"
+							mr={2}
 							name={user.fullname}
 							src={user.profile_picture}
 						/>
@@ -40,6 +47,7 @@ export default function ThreadForm() {
 							placeholder="What is happening?!"
 							_focus={{ color: "white" }}
 							name="content"
+							rounded={"10"}
 							onChange={handleChange}
 							value={form.content}
 						/>

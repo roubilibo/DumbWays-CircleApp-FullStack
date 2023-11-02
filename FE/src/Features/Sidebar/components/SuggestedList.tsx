@@ -1,5 +1,5 @@
 import { Box, Card, Stack, Text } from "@chakra-ui/react";
-import SuggestedDetail from "../SuggestedBase";
+import SuggestedDetail from "./SuggestedBase";
 
 function Suggested() {
 	return (
