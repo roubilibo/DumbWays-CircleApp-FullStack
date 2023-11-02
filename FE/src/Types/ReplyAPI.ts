@@ -1,12 +1,15 @@
-import ThreadAPI from "./ThreadAPI";
-import UserAPI from "./UserAPI";
+import { ThreadApi } from "./ThreadAPI";
+import { UserAPI } from "./UserAPI";
 
-type ReplyAPI = {
+export type ReplyAPI = {
 	id: number;
 	image: string;
 	content: string;
-	thread: ThreadAPI;
+	thread: ThreadApi;
 	user: UserAPI;
 };
 
-export default ReplyAPI;
+export type PostReply = {
+	thread: number;
+	content: string;
+};

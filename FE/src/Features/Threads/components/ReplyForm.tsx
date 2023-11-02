@@ -7,11 +7,11 @@ import {
 	Input,
 } from "@chakra-ui/react";
 import { BiImageAdd } from "react-icons/bi";
-import { usePostThread } from "../Hooks/usePostThread";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/type/RootState";
+import { usePostReply } from "../Hooks/usePostReply";
 
-export default function ThreadForm() {
+export default function ReplyForm() {
 	const user = useSelector((state: RootState) => state.auth);
 	const {
 		handleButtonClick,
@@ -21,7 +21,7 @@ export default function ThreadForm() {
 		isPending,
 		fileInputRef,
 		form,
-	} = usePostThread();
+	} = usePostReply();
 
 	return (
 		<form encType="multipart/form-data">

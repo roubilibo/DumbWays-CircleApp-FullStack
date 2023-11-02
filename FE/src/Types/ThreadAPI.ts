@@ -1,5 +1,5 @@
 import LikeAPI from "./LikeAPI";
-import ReplyAPI from "./ReplyAPI";
+import { ReplyAPI } from "./ReplyAPI";
 import { UserAPI } from "./UserAPI";
 
 export type ThreadApi = {

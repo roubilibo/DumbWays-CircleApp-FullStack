@@ -16,6 +16,7 @@ import { AiFillHeart } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
 import { useState } from "react";
 import { ThreadApi } from "@/Types/ThreadAPI";
+import { Link } from "react-router-dom";
 
 // interface IProps {
 //     image?: string;
@@ -28,7 +29,7 @@ import { ThreadApi } from "@/Types/ThreadAPI";
 //     onClick?: () => void
 // }
 function BaseThread(props: ThreadApi) {
-	const { content, image, user, replies, likes } = props;
+	const { content, image, user, replies, likes, id } = props;
 
 	const [like, setLike] = useState(false);
 
@@ -59,28 +60,30 @@ function BaseThread(props: ThreadApi) {
 						</Text>
 					</Text>
 				</HStack>
-				<Flex width={"100%"} justifyContent={"space-between"}>
-					<Box>
-						<Text fontSize="xs" color="whiteAlpha.800" fontWeight="light">
-							{content}
-						</Text>
-					</Box>
-					<Box>
-						{image && (
-							<Image
-								src={image}
-								objectFit="cover"
-								objectPosition="center"
-								w="50px"
-								h="50px"
-								mr="10px"
-								cursor="pointer"
-								borderRadius={2.5}
-								onClick={onOpen}
-							/>
-						)}
-					</Box>
-				</Flex>
+				<Link to={`/thread/${id}`}>
+					<Flex width={"100%"} justifyContent={"space-between"}>
+						<Box>
+							<Text fontSize="xs" color="whiteAlpha.800" fontWeight="light">
+								{content}
+							</Text>
+						</Box>
+						<Box>
+							{image && (
+								<Image
+									src={image}
+									objectFit="cover"
+									objectPosition="center"
+									w="50px"
+									h="50px"
+									mr="10px"
+									cursor="pointer"
+									borderRadius={2.5}
+									onClick={onOpen}
+								/>
+							)}
+						</Box>
+					</Flex>
+				</Link>
 				{/*?/ modal image  */}
 				<Modal isOpen={isOpen} onClose={onClose}>
 					<ModalOverlay />
@@ -110,12 +113,14 @@ function BaseThread(props: ThreadApi) {
 							{likes?.length}
 						</Text>
 					</HStack>
-					<HStack cursor="pointer" color="whiteAlpha.600" mt={2}>
-						<BiCommentDetail size={20} />
-						<Text fontSize="sm" color="whiteAlpha.600">
-							{replies?.length}
-						</Text>
-					</HStack>
+					<Link to={`/thread/${id}`}>
+						<HStack cursor="pointer" color="whiteAlpha.600" mt={2}>
+							<BiCommentDetail size={20} />
+							<Text fontSize="sm" color="whiteAlpha.600">
+								{replies?.length}
+							</Text>
+						</HStack>
+					</Link>
 				</HStack>
 			</Box>
 		</Flex>

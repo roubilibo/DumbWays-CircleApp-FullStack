@@ -1,4 +1,4 @@
-import { Box, ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import Home from "./pages/Home";
 import {
 	// BrowserRouter,
@@ -18,6 +18,7 @@ import { AUTH_CHECK, AUTH_ERROR } from "./store/RootReducer";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AppLayout from "./layout/AppLayout";
+import ThreadDetail from "./Features/Threads/components/ThreadDetail";
 
 const theme = extendTheme({
 	styles: {
@@ -84,12 +85,12 @@ function App() {
 					<Routes>
 						<Route element={<IsNotLogin />}>
 							<Route path="/" element={<Home />} />
+							<Route path="/thread/:id" element={<ThreadDetail />} />
 						</Route>
 						<Route path="/" element={<IsLogin />}>
 							<Route path="/" element={<Home />} />
 							<Route path="/auth/register" element={<Register />} />
 							<Route path="/auth/login" element={<Login />} />
-							<Route path="/detail-thread/:id" element={<Box>Not Found</Box>} />
 						</Route>
 					</Routes>
 				</ChakraProvider>

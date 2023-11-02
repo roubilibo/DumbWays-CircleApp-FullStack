@@ -11,7 +11,7 @@ export function useGetThread() {
 		// queryFn: async () => await API.get("/threads").then((res) => res.data),
 		queryFn: async () => {
 			const { data } = await API.get("/threads");
-			return data;
+			return data.data;
 		},
 	});
 	return { getThread, refetch, isLoading };

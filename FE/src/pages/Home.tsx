@@ -3,7 +3,7 @@ import { BsArrowLeftShort } from "react-icons/bs";
 import { useState } from "react";
 import { ThreadApi } from "@/Types/ThreadAPI";
 import BaseThread from "@/Features/Threads/components/Thread";
-import { useGetThread } from "@/Features/Threads/Hooks/useGetThread";
+import { useGetThread } from "@/Features/Threads/Hooks/useGetThreads";
 import ThreadForm from "@/Features/Threads/components/ThreadForm";
 
 function Home() {

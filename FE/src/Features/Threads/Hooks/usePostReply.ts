@@ -1,20 +1,18 @@
-import { ThreadPost } from "@/Types/ThreadAPI";
-import { API } from "@/libs/API";
+import { useParams } from "react-router-dom";
+import { useToast } from "./useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ChangeEvent, useRef, useState } from "react";
+import { PostReply } from "@/Types/ReplyAPI";
+import { API } from "@/libs/API";
 
-export function usePostThread() {
-	const [form, setForm] = useState<ThreadPost>({
+export function usePostReply() {
+	const { id } = useParams();
+	const toast = useToast();
+	const queryClient = useQueryClient();
+	const [form, setForm] = useState<PostReply>({
 		content: "",
+		thread: Number(id),
 	});
-
-	const QueryClient = useQueryClient();
-	const fileInputRef = useRef<HTMLInputElement>(null);
-
-	function handleButtonClick() {
-		fileInputRef.current?.click();
-	}
-
 	const [image, setImage] = useState<File | null>(null);
 
 	function handleChange(e: ChangeEvent<HTMLInputElement>) {
@@ -23,7 +21,10 @@ export function usePostThread() {
 			[e.target.name]: e.target.files ? e.target.files : e.target.value,
 		});
 	}
-
+	const fileInputRef = useRef<HTMLInputElement>(null);
+	function handleButtonClick() {
+		fileInputRef.current?.click();
+	}
 	const { mutate: handlePost, isPending } = useMutation({
 		mutationFn: async () => {
 			const formData = new FormData();
@@ -31,23 +32,27 @@ export function usePostThread() {
 				formData.append("image", image);
 			}
 			formData.append("content", form.content);
+			formData.append("thread", form.thread.toString());
 			await API.post("/thread", formData);
 		},
 		onSuccess: () => {
-			QueryClient.invalidateQueries({ queryKey: ["thread"] });
+			queryClient.invalidateQueries({ queryKey: ["thread-reply"] });
 			setForm({
 				content: "",
+				thread: Number(id),
 			});
 			setImage(null);
 		},
 	});
+
 	return {
 		form,
 		handleButtonClick,
 		handleChange,
 		handlePost,
-		fileInputRef,
-		isPending,
 		setImage,
+		isPending,
+		fileInputRef,
+		toast,
 	};
 }

@@ -30,7 +30,8 @@ class ThreadServices {
 					created_at: "DESC",
 				},
 			});
-			return res.status(200).json(threads);
+			// return res.status(200).json(threads);
+			return res.status(200).json({ code: 200, data: threads });
 		} catch (error) {
 			res.status(500).json({ error: "error while getting threads" });
 		}
@@ -73,6 +74,7 @@ class ThreadServices {
 		try {
 			const id = parseInt(req.params.id);
 			const thread = await this.ThreadRepository.findOne({
+				relations: ["user", "replies", "likes", "replies.user"],
 				where: { id: id },
 			});
 			return res.status(200).json(thread);

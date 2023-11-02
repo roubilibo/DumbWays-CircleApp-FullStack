@@ -140,6 +140,8 @@ class UserServices {
 					email: true,
 					username: true,
 					fullname: true,
+					profile_picture: true,
+					bio: true,
 				},
 			});
 			if (!checkEmail) {
@@ -163,6 +165,8 @@ class UserServices {
 				username: checkEmail.username,
 				fullname: checkEmail.fullname,
 				email: checkEmail.email,
+				profile_picture: checkEmail.profile_picture,
+				bio: checkEmail.bio,
 			});
 			const token = jwt.sign({ user }, "secret", {
 				expiresIn: "1h",

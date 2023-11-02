@@ -7,6 +7,7 @@ import { useLogout } from "@/Features/Auth/Hooks/useLogout";
 
 function Navbar() {
 	const { loading, handleLogout } = useLogout();
+
 	return (
 		<Stack h="full" justify="space-between">
 			<Box>
@@ -28,7 +29,6 @@ function Navbar() {
 						<AiOutlineUser size={25} />
 						<Text fontSize="sm  ">Profile</Text>
 					</HStack>
-
 					<Button size="sm" rounded="full" colorScheme="whatsapp">
 						Create Post
 					</Button>
