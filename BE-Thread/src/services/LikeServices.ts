@@ -37,10 +37,28 @@ class LikeServices {
 			if (error) {
 				return res.status(400).json({ error: error.details[0].message });
 			}
+
+			const likeSelected: Like | null = await this.LikeRepository.findOne({
+				where: {
+					user: {
+						id: res.locals.loginSession.user.id,
+					},
+					thread: {
+						id: value.thread,
+					},
+				},
+			});
+
+			if (likeSelected) {
+				await this.LikeRepository.remove(likeSelected);
+				return res.status(200).json({ message: "like deleted" });
+			}
+
 			const like = this.LikeRepository.create({
-				user: value.user,
+				user: res.locals.loginSession.user.id,
 				thread: value.thread,
 			});
+
 			const createLike = await this.LikeRepository.save(like);
 			return res.status(200).json(createLike);
 		} catch (error) {

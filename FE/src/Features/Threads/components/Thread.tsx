@@ -17,27 +17,40 @@ import { BiCommentDetail } from "react-icons/bi";
 import { useState } from "react";
 import { ThreadApi } from "@/Types/ThreadAPI";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/type/RootState";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { API } from "@/libs/API";
 
-// interface IProps {
-//     image?: string;
-//     name?: string;
-//     username?: string;
-//     content?: string;
-//     likes?: number;
-//     comment?: number;
-//     time?: string;
-//     onClick?: () => void
-// }
 function BaseThread(props: ThreadApi) {
 	const { content, image, user, replies, likes, id } = props;
 
-	const [like, setLike] = useState(false);
+	const [like, setLike] = useState({
+		thread: id,
+	});
+	const userId = useSelector((state: RootState) => state?.auth);
+
+	const queryClient = useQueryClient();
+
+	const { mutate: handleLike } = useMutation({
+		mutationFn: () => {
+			return API.post(`like`, like);
+		},
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["thread"] });
+		},
+		onError: (error) => {
+			console.log(error);
+		},
+	});
+
+	function handleClick() {
+		setLike({ thread: id });
+		handleLike();
+	}
 
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	// console.log(user.profile_picture);
-	function handleLike() {
-		setLike(!like);
-	}
 
 	return (
 		/* Hide the default scrollbar */
@@ -104,11 +117,18 @@ function BaseThread(props: ThreadApi) {
 				</Modal>
 				<HStack spacing={6}>
 					<HStack
-						onClick={handleLike}
+						onClick={handleClick}
 						cursor="pointer"
 						color="whiteAlpha.600"
 						mt={2}>
-						<AiFillHeart size={20} color={like ? "red" : ""} />
+						<AiFillHeart
+							size={20}
+							color={
+								likes?.map((like) => like.user.id).includes(userId.id)
+									? "red"
+									: ""
+							}
+						/>
 						<Text fontSize="sm" color="whiteAlpha.600">
 							{likes?.length}
 						</Text>

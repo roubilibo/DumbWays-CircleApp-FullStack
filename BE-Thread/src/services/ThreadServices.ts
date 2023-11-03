@@ -16,7 +16,7 @@ class ThreadServices {
 	async find(req: Request, res: Response): Promise<Response> {
 		try {
 			const threads = await this.ThreadRepository.find({
-				relations: ["user", "replies", "likes", "replies.user"],
+				relations: ["user", "replies", "likes", "replies.user", "likes.user"],
 				// select: {
 				// 	user: {
 				// 		id: true,
