@@ -1,22 +1,22 @@
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useGetDetailThread } from "../Hooks/useGetDetailThread";
 import {
 	AbsoluteCenter,
 	Avatar,
 	Box,
-	Button,
+	// Button,
 	Divider,
 	HStack,
 	Heading,
 	Image,
 	Text,
 } from "@chakra-ui/react";
-import { BiMessageAltDetail } from "react-icons/bi";
-import { BsHeart } from "react-icons/bs";
+// import { BiMessageAltDetail } from "react-icons/bi";
+// import { BsHeart } from "react-icons/bs";
 import ReplyForm from "./ReplyForm";
 
 export default function ThreadDetail() {
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
 	const { getDetailThread, isLoading } = useGetDetailThread();
 
@@ -37,7 +37,7 @@ export default function ThreadDetail() {
 					<Heading size="xl" pb={8}>
 						Thread Replies
 					</Heading>
-					<Button onClick={() => navigate(-1)}>Back</Button>
+					{/* <Button onClick={() => navigate(-1)}>Back</Button> */}
 				</Box>
 				<HStack>
 					<Box>
@@ -84,7 +84,7 @@ export default function ThreadDetail() {
 							<Box my="2">
 								<Text fontSize="sm">{getDetailThread.content}</Text>
 							</Box>
-							<Box>
+							{/* <Box>
 								<HStack fontSize="xs">
 									<HStack>
 										<BsHeart />
@@ -96,7 +96,7 @@ export default function ThreadDetail() {
 										<Text>{getDetailThread.replies.length} Replies</Text>
 									</HStack>
 								</HStack>
-							</Box>
+							</Box> */}
 						</Box>
 					</Box>
 				</HStack>

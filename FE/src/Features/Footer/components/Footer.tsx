@@ -22,7 +22,7 @@ function Footer() {
 				Powered by{" "}
 				<Image
 					w="30px"
-					src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUW0u5Eiiy3oM6wcpeEE6sXCzlh8G-tX1_Iw&usqp=CAU"
+					src="https://res.cloudinary.com/dtha7yn1x/image/upload/v1698997549/dumbways_mnc83m.png"
 					alt="logo"
 				/>{" "}
 				Dumbways Indonesia #1Coding Bootcamp

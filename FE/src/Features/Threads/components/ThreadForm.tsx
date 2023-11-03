@@ -38,7 +38,7 @@ export default function ThreadForm() {
 					mb={15}
 					// bg={"#333333"}
 					border={"1px solid white"}
-					p={5}
+					p={3}
 					rounded={"full"}>
 					<HStack w={"full"}>
 						<Avatar
