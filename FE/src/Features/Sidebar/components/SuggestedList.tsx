@@ -4,6 +4,7 @@ import SuggestedDetail from "./SuggestedBase";
 import { useUsers } from "../Hooks/useUsers";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/type/RootState";
+import _ from "lodash";
 
 function Suggested() {
 	const { userLists, isLoading } = useUsers();
@@ -18,15 +19,17 @@ function Suggested() {
 			<Text color="white">Suggested for you</Text>
 			<Box mt={3}>
 				<Stack overflowY="auto">
-					{List.map((user: any) => (
-						<SuggestedDetail
-							key={user.id}
-							user_id={user.id}
-							username={user.username}
-							fullname={user.fullname}
-							profile_picture={user.profile_picture}
-						/>
-					))}
+					{_.shuffle(List)
+						.slice(0, 6)
+						.map((user: any) => (
+							<SuggestedDetail
+								key={user.id}
+								user_id={user.id}
+								username={user.username}
+								fullname={user.fullname}
+								profile_picture={user.profile_picture}
+							/>
+						))}
 				</Stack>
 			</Box>
 		</Card>

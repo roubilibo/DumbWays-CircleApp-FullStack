@@ -42,7 +42,7 @@ class ThreadServices {
 			// const data = req.body;
 			const data = {
 				content: req.body.content,
-				image: req.file?.path || "",
+				// image: req.file?.path || "",
 				user: res.locals.loginSession.user.id,
 			};
 
@@ -77,6 +77,7 @@ class ThreadServices {
 				relations: ["user", "replies", "likes", "replies.user"],
 				where: { id: id },
 			});
+
 			return res.status(200).json(thread);
 		} catch (error) {
 			res.status(500).json({ error: "error while getting thread" });

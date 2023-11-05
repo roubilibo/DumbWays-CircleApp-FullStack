@@ -20,6 +20,8 @@ import Register from "./pages/Register";
 import AppLayout from "./layout/AppLayout";
 import ThreadDetail from "./Features/Threads/components/ThreadDetail";
 import Follows from "./pages/Follows";
+import Search from "./pages/Search";
+import Profile from "./pages/Profile";
 
 const theme = extendTheme({
 	styles: {
@@ -52,6 +54,7 @@ function App() {
 			dispatch(AUTH_ERROR());
 			console.log("auth check error", err);
 			setIsLoading(false);
+			localStorage.removeItem("token");
 			navigate("/auth/login");
 		}
 	}
@@ -88,6 +91,8 @@ function App() {
 							<Route path="/" element={<Home />} />
 							<Route path="/thread/:id" element={<ThreadDetail />} />
 							<Route path="follows" element={<Follows />} />
+							<Route path="search" element={<Search />} />
+							<Route path="profile" element={<Profile />} />
 						</Route>
 						<Route path="/" element={<IsLogin />}>
 							<Route path="/" element={<Home />} />

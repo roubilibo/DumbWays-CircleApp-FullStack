@@ -5,6 +5,8 @@ import { Response, Request } from "express";
 import { createUserSchema, loginSchema } from "../utils/Validator/Threads";
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
+import { uploadToCloudinary } from "../utils/Cloudinary/Cloudinary";
+import { deleteFile } from "../utils/Cloudinary/FIleHelper";
 
 class UserServices {
 	private readonly UserRepository: Repository<User> =
@@ -55,20 +57,30 @@ class UserServices {
 	}
 	async update(req: Request, res: Response): Promise<Response> {
 		try {
-			const id = parseInt(req.params.id);
+			// const id = parseInt(req.params.id);
 			const data = req.body;
 			const { error, value } = createUserSchema.validate(data);
 			if (error) {
 				return res.status(400).json({ error: error.details[0].message });
 			}
 			const user = await this.UserRepository.findOne({
-				where: { id: id },
+				where: { id: res.locals.loginSession.user.id },
 			});
+
+			if (value.password) {
+				const hashedPassword = await bcrypt.hash(value.password, 10);
+				value.password = hashedPassword;
+			}
+			let profile_picture = "";
+			if (req.file?.filename) {
+				profile_picture = await uploadToCloudinary(req.file);
+				deleteFile(req.file.path);
+			}
+
 			user.fullname = value.fullname;
 			user.username = value.username;
 			user.email = value.email;
-			user.password = value.password;
-			user.profile_picture = value.profile_picture;
+			user.profile_picture = profile_picture;
 			user.bio = value.bio;
 			const updateUser = await this.UserRepository.save(user);
 			return res.status(200).json(updateUser);
@@ -170,7 +182,7 @@ class UserServices {
 				bio: checkEmail.bio,
 			});
 			const token = jwt.sign({ user }, "secret", {
-				expiresIn: "1h",
+				expiresIn: "6h",
 			});
 			return res.status(200).json({ user, token });
 		} catch (error) {

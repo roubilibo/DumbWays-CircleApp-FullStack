@@ -52,11 +52,13 @@ export default function ThreadForm() {
 							color="whiteAlpha.400"
 							placeholder="What is happening?!"
 							_focus={{ color: "white" }}
+							// focusBorderColor="green"
 							name="content"
 							rounded={"10"}
 							onChange={handleChange}
 							value={form.content}
 							onKeyDown={handleKeyDown}
+							id="form-content"
 						/>
 					</HStack>
 					<HStack>

@@ -22,22 +22,29 @@ function Navbar() {
 							<Text fontSize="sm  ">Home</Text>
 						</HStack>
 					</Link>
-					<HStack cursor="pointer" color="white">
-						<TbUserSearch size={25} />
-						<Text fontSize="sm  ">Search</Text>
-					</HStack>
+					<Link to="/search">
+						<HStack cursor="pointer" color="white">
+							<TbUserSearch size={25} />
+							<Text fontSize="sm  ">Search</Text>
+						</HStack>
+					</Link>
 					<Link to="/follows">
 						<HStack cursor="pointer" color="white">
 							<AiOutlineHeart color="transparant" size={25} />
 							<Text fontSize="sm  ">Follows</Text>
 						</HStack>
 					</Link>
-
-					<HStack cursor="pointer" color="white">
-						<AiOutlineUser size={25} />
-						<Text fontSize="sm  ">Profile</Text>
-					</HStack>
-					<Button size="sm" rounded="full" colorScheme="whatsapp">
+					<Link to="/profile">
+						<HStack cursor="pointer" color="white">
+							<AiOutlineUser size={25} />
+							<Text fontSize="sm  ">Profile</Text>
+						</HStack>
+					</Link>
+					<Button
+						onClick={() => document.getElementById("form-content")?.focus()}
+						size="sm"
+						rounded="full"
+						colorScheme="whatsapp">
 						Create Post
 					</Button>
 				</Stack>
