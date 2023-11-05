@@ -43,9 +43,10 @@ class UserServices {
 
 	async findOne(req: Request, res: Response): Promise<Response> {
 		try {
-			const id = parseInt(req.params.id);
+			const id = res.locals.loginSession.user.id;
 			const user = await this.UserRepository.findOne({
 				where: { id: id },
+				relations: ["following", "followers", "threads"],
 			});
 			return res.status(200).json(user);
 		} catch (error) {

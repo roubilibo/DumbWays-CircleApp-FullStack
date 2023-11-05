@@ -50,9 +50,9 @@ export class User {
 	@OneToMany(() => Reply, (reply) => reply.user)
 	replies: Reply[];
 
-	@ManyToMany(() => User, (user) => user.users)
+	@ManyToMany(() => User, (user) => user.following)
 	@JoinTable({
-		name: "following",
+		name: "follow",
 		joinColumn: {
 			name: "following_id",
 			referencedColumnName: "id",
@@ -62,5 +62,8 @@ export class User {
 			referencedColumnName: "id",
 		},
 	})
-	users: User[];
+	followers: User[];
+
+	@ManyToMany(() => User, (user) => user.followers)
+	following: User[];
 }

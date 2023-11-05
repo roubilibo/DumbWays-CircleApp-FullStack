@@ -40,3 +40,7 @@ export const loginSchema = Joi.object({
 	email: Joi.string(),
 	password: Joi.string(),
 });
+
+export const FollowSchema = Joi.object({
+	user: Joi.number(),
+});

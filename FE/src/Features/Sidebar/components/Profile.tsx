@@ -10,6 +10,7 @@ import {
 	Text,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
+import { useUserProfile } from "../Hooks/useUserProfile";
 
 //
 {
@@ -18,6 +19,11 @@ import { useSelector } from "react-redux";
 
 function Profile() {
 	const user = useSelector((state: RootState) => state?.auth);
+	const { profileData, isLoading } = useUserProfile();
+
+	if (isLoading) return <div>Loading...</div>;
+
+	const { followers, following } = profileData;
 	return (
 		<Card bg="whiteAlpha.200" p={4}>
 			<Text color="white">My Profile</Text>
@@ -65,11 +71,11 @@ function Profile() {
 				</Text>
 				<HStack fontSize="sm">
 					<HStack>
-						<Text color="whiteAlpha.800">291</Text>
+						<Text color="whiteAlpha.800">{following?.length}</Text>
 						<Text color="whiteAlpha.600">Following</Text>
 					</HStack>
 					<HStack>
-						<Text color="whiteAlpha.800">212</Text>
+						<Text color="whiteAlpha.800">{followers?.length}</Text>
 						<Text color="whiteAlpha.600">Followers</Text>
 					</HStack>
 				</HStack>
