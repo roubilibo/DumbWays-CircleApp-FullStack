@@ -26,10 +26,13 @@ function Navbar() {
 						<TbUserSearch size={25} />
 						<Text fontSize="sm  ">Search</Text>
 					</HStack>
-					<HStack cursor="pointer" color="white">
-						<AiOutlineHeart color="transparant" size={25} />
-						<Text fontSize="sm  ">Follows</Text>
-					</HStack>
+					<Link to="/follows">
+						<HStack cursor="pointer" color="white">
+							<AiOutlineHeart color="transparant" size={25} />
+							<Text fontSize="sm  ">Follows</Text>
+						</HStack>
+					</Link>
+
 					<HStack cursor="pointer" color="white">
 						<AiOutlineUser size={25} />
 						<Text fontSize="sm  ">Profile</Text>

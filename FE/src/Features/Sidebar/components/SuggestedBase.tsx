@@ -5,7 +5,12 @@ import { Avatar, Button, HStack, Stack, Text } from "@chakra-ui/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
-function SuggestedDetail({ user_id, username, fullname }: any) {
+function SuggestedDetail({
+	user_id,
+	username,
+	fullname,
+	profile_picture,
+}: any) {
 	const [follwoId, setFollwoId] = useState({
 		user: user_id,
 	});
@@ -46,7 +51,7 @@ function SuggestedDetail({ user_id, username, fullname }: any) {
 	return (
 		<HStack justify="space-between">
 			<HStack spacing={3}>
-				<Avatar size="sm" />
+				<Avatar size="sm" name={fullname} src={profile_picture} />
 				<Stack spacing={-4}>
 					<Text fontSize="xs" color="white">
 						{fullname}

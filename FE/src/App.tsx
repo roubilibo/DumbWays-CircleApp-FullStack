@@ -19,6 +19,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AppLayout from "./layout/AppLayout";
 import ThreadDetail from "./Features/Threads/components/ThreadDetail";
+import Follows from "./pages/Follows";
 
 const theme = extendTheme({
 	styles: {
@@ -86,6 +87,7 @@ function App() {
 						<Route element={<IsNotLogin />}>
 							<Route path="/" element={<Home />} />
 							<Route path="/thread/:id" element={<ThreadDetail />} />
+							<Route path="follows" element={<Follows />} />
 						</Route>
 						<Route path="/" element={<IsLogin />}>
 							<Route path="/" element={<Home />} />

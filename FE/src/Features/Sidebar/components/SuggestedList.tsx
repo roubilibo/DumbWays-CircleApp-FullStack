@@ -24,6 +24,7 @@ function Suggested() {
 							user_id={user.id}
 							username={user.username}
 							fullname={user.fullname}
+							profile_picture={user.profile_picture}
 						/>
 					))}
 				</Stack>
