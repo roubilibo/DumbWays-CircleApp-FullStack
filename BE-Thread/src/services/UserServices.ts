@@ -2,7 +2,11 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../data-source";
 import { User } from "../entities/User";
 import { Response, Request } from "express";
-import { createUserSchema, loginSchema } from "../utils/Validator/Threads";
+import {
+	createUserSchema,
+	loginSchema,
+	updateUserSchema,
+} from "../utils/Validator/Threads";
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import { uploadToCloudinary } from "../utils/Cloudinary/Cloudinary";
@@ -59,7 +63,7 @@ class UserServices {
 		try {
 			// const id = parseInt(req.params.id);
 			const data = req.body;
-			const { error, value } = createUserSchema.validate(data);
+			const { error, value } = updateUserSchema.validate(data);
 			if (error) {
 				return res.status(400).json({ error: error.details[0].message });
 			}

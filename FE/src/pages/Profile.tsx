@@ -1,3 +1,4 @@
+import ProfileTabs from "@/Features/Profile/components/ProfileTabs";
 import { Box, Heading } from "@chakra-ui/react";
 
 export default function Profile() {
@@ -6,6 +7,7 @@ export default function Profile() {
 			<Heading color={"white"} size="xl" pb={8}>
 				My Profile
 			</Heading>
+			<ProfileTabs />
 		</Box>
 	);
 }

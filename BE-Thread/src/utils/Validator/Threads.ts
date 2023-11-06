@@ -19,6 +19,14 @@ export const createUserSchema = Joi.object({
 	profile_picture: Joi.string().allow(null, ""),
 	bio: Joi.string().allow(null, ""),
 });
+export const updateUserSchema = Joi.object({
+	username: Joi.string(),
+	fullname: Joi.string(),
+	email: Joi.string(),
+	password: Joi.string(),
+	profile_picture: Joi.string().allow(null, ""),
+	bio: Joi.string().allow(null, ""),
+});
 
 export const createReplySchema = Joi.object({
 	thread: Joi.number(),
