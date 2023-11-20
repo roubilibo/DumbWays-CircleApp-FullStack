@@ -10,7 +10,7 @@ export default new (class FollowServices {
 
 	async followUser(req: Request, res: Response): Promise<Response> {
 		try {
-			const userId = res.locals.loginSession.user.id; // Pengguna yang melakukan tindakan follow
+			const userId = res.locals.loginSession.id; // Pengguna yang melakukan tindakan follow
 
 			// const { user_id } = req.body;
 
@@ -70,7 +70,7 @@ export default new (class FollowServices {
 	async getFollowingUsers(req: Request, res: Response): Promise<Response> {
 		try {
 			// ID pengguna yang ingin mendapatkan daftar yang diikuti
-			const userId = res.locals.loginSession.user.id;
+			const userId = res.locals.loginSession.id;
 
 			const user = await this.UserRepository.findOne({
 				where: {
@@ -92,7 +92,7 @@ export default new (class FollowServices {
 	async getFollowerUsers(req: Request, res: Response): Promise<Response> {
 		try {
 			// ID pengguna yang ingin mendapatkan daftar yang diikuti
-			const userId = res.locals.loginSession.user.id;
+			const userId = res.locals.loginSession.id;
 
 			const user = await this.UserRepository.findOne({
 				where: {

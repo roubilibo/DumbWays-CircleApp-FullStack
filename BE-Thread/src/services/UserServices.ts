@@ -68,7 +68,7 @@ class UserServices {
 				return res.status(400).json({ error: error.details[0].message });
 			}
 			const user = await this.UserRepository.findOne({
-				where: { id: res.locals.loginSession.user.id },
+				where: { id: res.locals.loginSession.id },
 			});
 
 			if (value.password) {
@@ -177,18 +177,18 @@ class UserServices {
 				});
 			}
 
-			const user = this.UserRepository.create({
-				id: checkEmail.id,
-				username: checkEmail.username,
-				fullname: checkEmail.fullname,
-				email: checkEmail.email,
-				profile_picture: checkEmail.profile_picture,
-				bio: checkEmail.bio,
-			});
-			const token = jwt.sign({ user }, "secret", {
+			// const user = this.UserRepository.create({
+			// 	id: checkEmail.id,
+			// 	username: checkEmail.username,
+			// 	fullname: checkEmail.fullname,
+			// 	email: checkEmail.email,
+			// 	profile_picture: checkEmail.profile_picture,
+			// 	bio: checkEmail.bio,
+			// });
+			const token = jwt.sign({ id: checkEmail.id }, "secret", {
 				expiresIn: "6h",
 			});
-			return res.status(200).json({ user, token });
+			return res.status(200).json({ user: checkEmail, token });
 		} catch (error) {
 			console.error(error);
 			return res.status(500).json({ error: "Internal server error" });
@@ -199,7 +199,7 @@ class UserServices {
 		try {
 			const loginSession = res.locals.loginSession;
 			const user = await this.UserRepository.findOne({
-				where: { id: loginSession.user.id },
+				where: { id: loginSession.id },
 			});
 			return res.status(200).json({ user, message: "you are logged in" });
 		} catch (error) {

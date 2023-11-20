@@ -8,9 +8,13 @@ import ThreadForm from "@/Features/Threads/components/ThreadForm";
 
 function Home() {
 	const { getThread, isLoading } = useGetThread();
+	// console.log(getThread);
 
 	const [detail, setDetail] = useState(false);
 
+	// getThread?.map((e: ThreadApi) => {
+	// 	console.log(e.id);
+	// });
 	if (isLoading) {
 		return <div>Loading...</div>;
 	}

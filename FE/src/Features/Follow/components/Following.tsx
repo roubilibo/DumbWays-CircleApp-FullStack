@@ -45,9 +45,7 @@ export default function Following() {
 								</Flex>
 								<Heading size="xs"></Heading>
 								<Text pt="2" fontSize="sm">
-									{follower.bio
-										? follower.bio
-										: "Tidak ada deskripsi profil"}
+									{follower.bio ? follower.bio : "Tidak ada deskripsi profil"}
 								</Text>
 							</Box>
 						))}

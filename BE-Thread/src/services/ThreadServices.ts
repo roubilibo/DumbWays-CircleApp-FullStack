@@ -43,7 +43,7 @@ class ThreadServices {
 			const data = {
 				content: req.body.content,
 				// image: req.file?.path || "",
-				user: res.locals.loginSession.user.id,
+				user: res.locals.loginSession.id,
 			};
 
 			const { error, value } = createTHreadSchema.validate(data);
