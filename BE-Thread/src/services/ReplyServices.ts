@@ -77,7 +77,7 @@ class ReplysServices {
 			console.log(value);
 			const reply = this.ReplyRepository.create({
 				thread: value.thread,
-				user: res.locals.loginSession.id,
+				user: res.locals.loginSession.user.id,
 				content: value.content,
 				image: image,
 			});

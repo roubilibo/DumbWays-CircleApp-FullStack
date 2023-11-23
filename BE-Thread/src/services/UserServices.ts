@@ -177,15 +177,15 @@ class UserServices {
 				});
 			}
 
-			// const user = this.UserRepository.create({
-			// 	id: checkEmail.id,
-			// 	username: checkEmail.username,
-			// 	fullname: checkEmail.fullname,
-			// 	email: checkEmail.email,
-			// 	profile_picture: checkEmail.profile_picture,
-			// 	bio: checkEmail.bio,
-			// });
-			const token = jwt.sign({ id: checkEmail.id }, "secret", {
+			const user = this.UserRepository.create({
+				id: checkEmail.id,
+				username: checkEmail.username,
+				fullname: checkEmail.fullname,
+				email: checkEmail.email,
+				profile_picture: checkEmail.profile_picture,
+				bio: checkEmail.bio,
+			});
+			const token = jwt.sign({ user }, "secret", {
 				expiresIn: "6h",
 			});
 			return res.status(200).json({ user: checkEmail, token });
@@ -199,7 +199,7 @@ class UserServices {
 		try {
 			const loginSession = res.locals.loginSession;
 			const user = await this.UserRepository.findOne({
-				where: { id: loginSession.id },
+				where: { id: loginSession.user.id },
 			});
 			return res.status(200).json({ user, message: "you are logged in" });
 		} catch (error) {

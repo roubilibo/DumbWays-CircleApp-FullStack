@@ -41,7 +41,7 @@ class LikeServices {
 			const likeSelected: Like | null = await this.LikeRepository.findOne({
 				where: {
 					user: {
-						id: res.locals.loginSession.id,
+						id: res.locals.loginSession.user.id,
 					},
 					thread: {
 						id: value.thread,
@@ -55,7 +55,7 @@ class LikeServices {
 			}
 
 			const like = this.LikeRepository.create({
-				user: res.locals.loginSession.id,
+				user: res.locals.loginSession.user.id,
 				thread: value.thread,
 			});
 
