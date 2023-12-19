@@ -1,13 +1,14 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
+import Env from "./utils/Env/Env";
 
 export const AppDataSource = new DataSource({
 	type: "postgres",
-	host: "ep-plain-sun-74387267.ap-southeast-1.aws.neon.tech",
-	port: 5432,
-	username: "roubilibo",
-	password: "aiMI3fnq8Kbc",
-	database: "ThreadApps",
+	host: Env.DB_HOST,
+	port: Env.DB_PORT,
+	username: Env.DB_USER,
+	password: Env.DB_PASSWORD,
+	database: Env.DB_NAME,
 	synchronize: true,
 	logging: false,
 	entities: ["src/entities/*.ts"],

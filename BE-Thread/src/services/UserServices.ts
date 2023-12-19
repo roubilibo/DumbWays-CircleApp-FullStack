@@ -11,6 +11,7 @@ import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import { uploadToCloudinary } from "../utils/Cloudinary/Cloudinary";
 import { deleteFile } from "../utils/Cloudinary/FIleHelper";
+import Env from "../utils/Env/Env";
 
 class UserServices {
 	private readonly UserRepository: Repository<User> =
@@ -185,7 +186,7 @@ class UserServices {
 				profile_picture: checkEmail.profile_picture,
 				bio: checkEmail.bio,
 			});
-			const token = jwt.sign({ user }, "secret", {
+			const token = jwt.sign({ user }, Env.JWT_SECRET, {
 				expiresIn: "6h",
 			});
 			return res.status(200).json({ user: checkEmail, token });

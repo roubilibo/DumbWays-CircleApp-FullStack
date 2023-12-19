@@ -6,11 +6,12 @@ import UserRouter from "./routes/User";
 import ReplyRouter from "./routes/Reply";
 import LikeRouter from "./routes/Like";
 import FollowRouter from "./routes/Follow";
+import Env from "./utils/Env/Env";
 
 AppDataSource.initialize()
 	.then(async () => {
 		const app = express();
-		const port = 5000;
+		const port = Env.PORT;
 
 		const options: cors.CorsOptions = {
 			allowedHeaders: ["X-Requested-With", "Content-Type", "Authorization"],
