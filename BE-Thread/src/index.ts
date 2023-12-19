@@ -28,7 +28,7 @@ AppDataSource.initialize()
 		app.use("/api/v1", LikeRouter);
 		app.use("/api/v1", FollowRouter);
 
-		app.listen(port, () => `Server started on port ${port}`);
+		app.listen(port, () => console.log(`Server running on port ${port}`));
 	})
 
 	.catch((error) => console.log(error));
